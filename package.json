@@ -13,6 +13,8 @@
     "test:cov": "vitest run --coverage",
     "lint": "biome lint",
     "lint:fix": "biome lint --fix",
+    "lint:knip": "knip",
+    "fix:knip": "knip --fix --no-exit-code",
     "format": "biome format --write",
     "dev": "pnpm run --stream --color \"/^watch:/\"",
     "watch:compile": "tsc --watch",
@@ -47,6 +49,7 @@
     "typia": "^9.1.1",
     "ultimate-express": "1.4.8",
     "uuid": "^11.1.0"
+    "ultimate-express": "1.4.8"
   },
   "devDependencies": {
     "@amiceli/vitest-cucumber": "4.7.0",
@@ -54,14 +57,13 @@
     "@total-typescript/ts-reset": "0.6.1",
     "@types/node": "22.15.3",
     "@types/supertest": "6.0.3",
-    "chokidar": "4.0.3",
+    "knip": "^5.52.0",
     "supertest": "7.1.0",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.3.0",
     "typescript": "~5.8.3",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.48.0",
     "vitest": "3.1.2",
-    "vitest-mock-extended": "3.1.0",
     "wait-on": "8.0.3"
   },
   "packageManager": "pnpm@10.10.0"

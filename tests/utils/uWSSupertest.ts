@@ -3,7 +3,7 @@ import type uWS from "uWebSockets.js";
 import { us_listen_socket_close, us_socket_local_port } from "uWebSockets.js";
 import type { TemplatedApp } from "uWebSockets.js";
 
-export type SupportedUwsApp =
+type SupportedUwsApp =
   | TemplatedApp
   | {
       uwsApp?: TemplatedApp;
