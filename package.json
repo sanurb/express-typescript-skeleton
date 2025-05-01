@@ -1,0 +1,58 @@
+{
+  "name": "ultimate-express-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "imports": {
+    "#src/*": "./src/*",
+    "#tests/*": "./tests/*"
+  },
+  "scripts": {
+    "build": "rm -rf dist && swc src --copy-files -d dist",
+    "test": "vitest",
+    "test:cov": "vitest run --coverage",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --fix",
+    "format": "biome format --write",
+    "dev": "concurrently \"pnpm watch:compile\" \"pnpm watch:dev\"",
+    "watch:compile": "rm -rf dist && swc src --copy-files -w --out-dir dist",
+    "watch:dev": "wait-on ./dist/src/server.js && node --watch ./dist/src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanurb/ultimate-express-typescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanurb/ultimate-express-typescript/issues"
+  },
+  "homepage": "https://github.com/sanurb/ultimate-express-typescript#readme",
+  "dependencies": {
+    "@reflet/http": "1.0.0",
+    "@types/compression": "1.7.5",
+    "@types/response-time": "2.3.8",
+    "compression": "1.8.0",
+    "install": "0.13.0",
+    "response-time": "2.3.3",
+    "ultimate-express": "1.4.8"
+  },
+  "devDependencies": {
+    "@amiceli/vitest-cucumber": "4.7.0",
+    "@biomejs/biome": "1.9.4",
+    "@swc/cli": "0.7.3",
+    "@swc/core": "1.11.24",
+    "@total-typescript/ts-reset": "0.6.1",
+    "@types/node": "22.15.3",
+    "@types/supertest": "6.0.3",
+    "chokidar": "4.0.3",
+    "concurrently": "9.1.2",
+    "supertest": "7.1.0",
+    "typescript": "5.8.3",
+    "unplugin-swc": "1.5.2",
+    "vitest": "3.1.2",
+    "vitest-mock-extended": "3.1.0",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.48.0",
+    "wait-on": "8.0.3"
+  },
+  "packageManager": "pnpm@10.10.0"
+}
