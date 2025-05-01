@@ -8,12 +8,13 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
+    "typecheck": "tsc --pretty --noEmit",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "lint": "biome lint",
     "lint:fix": "biome lint --fix",
     "format": "biome format --write",
-    "dev": "concurrently \"pnpm watch:compile\" \"pnpm watch:dev\"",
+    "dev": "pnpm run --stream --color \"/^watch:/\"",
     "watch:compile": "tsc --watch",
     "watch:dev": "wait-on ./dist/server.js && node --watch ./dist/server.js",
     "prepare": "ts-patch install && ts-node build/env.ts"
@@ -54,7 +55,6 @@
     "@types/node": "22.15.3",
     "@types/supertest": "6.0.3",
     "chokidar": "4.0.3",
-    "concurrently": "9.1.2",
     "supertest": "7.1.0",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.3.0",
