@@ -49,7 +49,6 @@
     "typia": "^9.1.1",
     "ultimate-express": "1.4.8",
     "uuid": "^11.1.0"
-    "ultimate-express": "1.4.8"
   },
   "devDependencies": {
     "@amiceli/vitest-cucumber": "4.7.0",
