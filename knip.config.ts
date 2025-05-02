@@ -1,17 +1,17 @@
-import type { KnipConfig } from 'knip';
+import type { KnipConfig } from "knip";
 
 const config = {
-  entry: ['src/server.ts'],
-  ignore: ['dist', 'tests', 'coverage'],
+  entry: ["src/server.ts"],
+  ignore: ["dist", "tests", "coverage"],
   ignoreDependencies: [
-    'ts-node',
-    'ts-patch',
-    'vitest',
-    'supertest',
-    '@types/supertest',
-    '@types/node',
-    'wait-on',
-    '@total-typescript/ts-reset',
+    "ts-node",
+    "ts-patch",
+    "vitest",
+    "supertest",
+    "@types/supertest",
+    "@types/node",
+    "wait-on",
+    "@total-typescript/ts-reset",
   ],
 } satisfies KnipConfig;
 
