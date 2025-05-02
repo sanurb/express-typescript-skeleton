@@ -1,8 +1,8 @@
+import { type Express, json, urlencoded } from "express";
+import express from "express";
 import responseTime from "response-time";
-import { type Express, json, urlencoded } from "ultimate-express";
-import express from "ultimate-express";
-import { env } from "./config/envs";
-import { mountRoutes } from "./routes";
+import { env } from "./app/config/envs";
+import { healthRouter } from "./app/health/api/health_router";
 
 export const app: Express = express();
 
@@ -16,5 +16,4 @@ app.use(responseTime());
 app.use(json({ limit: "100mb" }));
 app.use(urlencoded({ extended: true }));
 
-// only 1-level deep routers can be optimized
-mountRoutes(app);
+app.use("/api/health", healthRouter);
