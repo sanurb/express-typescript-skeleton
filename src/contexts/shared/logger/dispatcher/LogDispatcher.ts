@@ -1,4 +1,5 @@
 import { EventEmitter } from "tseep";
+import { LOG_LEVELS } from "../level";
 import type {
   LogDispatcher,
   LogLevel,
