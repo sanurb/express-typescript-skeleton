@@ -19,7 +19,7 @@
     "dev": "pnpm run --stream --color \"/^watch:/\"",
     "watch:compile": "tsc --watch",
     "watch:dev": "wait-on ./dist/index.js && node --watch ./dist/index.js --watch-preserve-output",
-    "prepare": "ts-patch install && ts-node build/env.ts"
+    "prepare": "ts-patch install && ts-node scripts/prepare-env.ts"
   },
   "repository": {
     "type": "git",
