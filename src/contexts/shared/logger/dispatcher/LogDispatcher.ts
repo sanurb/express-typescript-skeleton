@@ -60,15 +60,6 @@ export class DefaultLogDispatcher
   }
 
   private shouldLog(level: LogLevel, minLevel: LogLevel): boolean {
-    const order: readonly LogLevel[] = [
-      "trace",
-      "debug",
-      "info",
-      "warn",
-      "error",
-      "fatal",
-      "silent",
-    ];
-    return order.indexOf(level) >= order.indexOf(minLevel);
+    return LOG_LEVELS.indexOf(level) >= LOG_LEVELS.indexOf(minLevel);
   }
 }
