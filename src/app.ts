@@ -1,19 +1,22 @@
-import { type Express, json, urlencoded } from "express";
-import express from "express";
-import responseTime from "response-time";
+/**
+ * @fileoverview Application setup: wires config, HTTP server, and process signals.
+ */
+
 import { env } from "./app/config/envs";
-import { healthRouter } from "./app/health/api/health_router";
+import { ExpressHttpServer } from "./app/http/server/express-server";
+import { logger } from "./contexts/shared/logger";
 
-export const app: Express = express();
+/** Compose all application concerns and launch. */
+export async function bootstrap(): Promise<ExpressHttpServer> {
+  const server = new ExpressHttpServer(env);
 
-if (env.OPENAI_API_KEY === undefined)
-  console.error("env.OPENAI_API_KEY is not defined.");
+  server.on("beforeStart", () => logger.info("Starting server..."));
+  server.on("afterStart", () =>
+    logger.info(`Server listening on port ${env.PORT}`),
+  );
+  server.on("beforeStop", () => logger.info("Stopping server…"));
+  server.on("afterStop", () => logger.info("Server stopped."));
 
-app.set("catch async errors", true);
-app.set("port", env.PORT ?? 3000);
-
-app.use(responseTime());
-app.use(json({ limit: "100mb" }));
-app.use(urlencoded({ extended: true }));
-
-app.use("/api/health", healthRouter);
+  await server.start();
+  return server;
+}
