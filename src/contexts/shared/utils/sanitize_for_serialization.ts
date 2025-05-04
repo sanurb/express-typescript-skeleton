@@ -1,22 +1,141 @@
-import { HashSet } from "tstl";
-import type { JsonObject, JsonPrimitive, JsonValue } from "type-fest";
+/**
+ * @fileoverview
+ * Sanitizes arbitrary inputs into a JSON‐safe structure:
+ *  - Primitives are passed through unchanged.
+ *  - Dates ↦ ISO strings.
+ *  - RegExps ↦ `.toString()`.
+ *  - Maps ↦ plain objects.
+ *  - Sets ↦ arrays.
+ *  - Errors ↦ `{name,message,stack}`.
+ *  - Circular references ↦ the string `"[Circular]"`.
+ *  - Everything else unsupported (functions, symbols, BigInt, etc.) ↦ `null`.
+ */
+
+import { HashMap, HashSet } from "tstl";
+import type {
+  JsonArray,
+  JsonObject,
+  JsonPrimitive,
+  JsonValue,
+} from "type-fest";
+
+type RecurseFn = (value: unknown) => JsonValue;
+type Handler = (value: unknown, recurse: RecurseFn) => JsonValue;
 
 /**
- * @param input  Any value you might pass to JSON.stringify.
- * @returns      A `JsonValue` with:
- *  - primitives unchanged,
- *  - Date → ISO string,
- *  - RegExp → toString(),
- *  - Map → object,
- *  - Set → array,
- *  - circular → "[Circular]",
- *  - functions/symbols/undefined → null.
+ * Returns the internal [[Class]] tag of any value.
+ *
+ * @param value The value to inspect.
+ * @returns The tag, e.g. "[object Date]", "[object Map]", etc.
+ */
+function getObjectTag(value: unknown): string {
+  return Object.prototype.toString.call(value);
+}
+
+/**
+ * Initializes the dispatch table mapping [[Class]] tags to handlers.
+ *
+ * @returns A `HashMap` from tag to handler function.
+ */
+function createHandlers(): HashMap<string, Handler> {
+  const table = new HashMap<string, Handler>();
+
+  /** A read‐only list of `[tag, handler]` entries. */
+  const entries: ReadonlyArray<readonly [string, Handler]> = [
+    // Primitives & unsupported
+    ["[object Boolean]", () => null],
+    ["[object Number]", () => null],
+    ["[object String]", () => null],
+    ["[object Symbol]", () => null],
+    ["[object BigInt]", () => null],
+    ["[object Function]", () => null],
+
+    // Built-ins
+    ["[object Date]", (v) => (v as Date).toISOString()],
+    ["[object RegExp]", (v) => (v as RegExp).toString()],
+
+    // Arrays
+    [
+      "[object Array]",
+      (v, recurse) => (v as Array<unknown>).map(recurse) as JsonArray,
+    ],
+
+    // Maps ↦ objects
+    [
+      "[object Map]",
+      (v, recurse) => {
+        const result: JsonObject = {};
+        for (const [key, val] of v as Map<unknown, unknown>) {
+          const k = typeof key === "string" ? key : JSON.stringify(key);
+          result[k] = recurse(val);
+        }
+        return result;
+      },
+    ],
+
+    // Sets ↦ arrays
+    [
+      "[object Set]",
+      (v, recurse) => Array.from(v as Set<unknown>).map(recurse) as JsonArray,
+    ],
+
+    // Errors ↦ {name,message,stack}
+    [
+      "[object Error]",
+      (v, recurse) => {
+        const err = v as Error;
+        const o: JsonObject = {
+          name: err.name,
+          message: err.message,
+        };
+        if (typeof err.stack === "string") {
+          o.stack = err.stack;
+        }
+        return recurse(o);
+      },
+    ],
+
+    // Plain objects (falls back to this if no tag matches)
+    [
+      "[object Object]",
+      (v, recurse) => {
+        const result: JsonObject = {};
+        const obj = v as Record<string, unknown>;
+        for (const key of Object.keys(obj)) {
+          result[key] = recurse(obj[key]);
+        }
+        return result;
+      },
+    ],
+  ];
+
+  for (const [tag, fn] of entries) {
+    table.emplace(tag, fn);
+  }
+
+  return table;
+}
+
+/**
+ * @param input Any value you might pass to `JSON.stringify`.
+ * @returns A `JsonValue` that is safe to feed to JSON.stringify:
+ *   - cycles → `"[Circular]"`,
+ *   - unsupported → `null`,
+ *   - all other types handled per above.
  */
 export function sanitizeForSerialization(input: unknown): JsonValue {
   const visited = new HashSet<object>();
+  const handlers = createHandlers();
 
+  /**
+   * Recursively sanitizes a value, using our dispatch table and
+   * cycle detection.
+   *
+   * @param value The value to sanitize.
+   * @returns A JSON-compatible value.
+   */
   function recurse(value: unknown): JsonValue {
-    // 1) Primitives
+    // 1) Primitives pass through.
     if (
       value === null ||
       typeof value === "boolean" ||
@@ -26,58 +145,33 @@ export function sanitizeForSerialization(input: unknown): JsonValue {
       return value as JsonPrimitive;
     }
 
-    // 2) Dates & RegExps
-    if (value instanceof Date) {
-      return value.toISOString();
-    }
-    if (value instanceof RegExp) {
-      return value.toString();
-    }
-
-    // 3) Objects (including Arrays, Maps, Sets)
-    if (typeof value === "object" && value !== null) {
-      if (visited.has(value)) {
-        return "[Circular]";
-      }
-      visited.insert(value);
-
-      // — Arrays
-      if (Array.isArray(value)) {
-        const out: JsonValue[] = [];
-        for (const el of value) {
-          out.push(recurse(el));
+    // 2) Anything object‐like?
+    if (typeof value === "object") {
+      // 2a) Cycle guard
+      if (value !== null) {
+        if (visited.has(value)) {
+          return "[Circular]";
         }
-        return out; // JsonValue[] is a valid JsonArray
+        visited.insert(value);
       }
 
-      // — Map → object
-      if (value instanceof Map) {
-        const out: JsonObject = {};
-        for (const [k, v] of value.entries()) {
-          const key = typeof k === "string" ? k : JSON.stringify(k as unknown);
-          out[key] = recurse(v);
-        }
+      // 2b) Dispatch by [[Class]] tag
+      const tag = getObjectTag(value);
+      const iter = handlers.find(tag);
+
+      if (!iter.equals(handlers.end())) {
+        // `second` is the handler fn
+        const out = iter.second(value, recurse);
+        visited.erase(value as object);
         return out;
       }
 
-      // — Set → array
-      if (value instanceof Set) {
-        const out: JsonValue[] = [];
-        for (const v of value.values()) {
-          out.push(recurse(v));
-        }
-        return out;
-      }
-
-      // — Plain object
-      const out: JsonObject = {};
-      for (const key of Object.keys(value)) {
-        out[key] = recurse((value as Record<string, unknown>)[key]);
-      }
-      return out;
+      // 2c) Fallback: everything else → null
+      visited.erase(value as object);
+      return null;
     }
 
-    // 4) Everything else → null
+    // 3) Functions, symbols, bigint, undefined, etc. → null
     return null;
   }
 
