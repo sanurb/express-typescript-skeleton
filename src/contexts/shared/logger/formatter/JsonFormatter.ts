@@ -1,15 +1,15 @@
 /**
- * @fileoverview JSON formatter for log records, using Typia for
- * AOT-compiled, cycle-safe serialization without runtime overhead.
+ * @fileoverview
+ * Formats a LogRecord as a newline-terminated JSON string,
+ * sanitizing cycles in `meta` before feeding into Typia’s AOT serializer.
  */
 
+import type { JsonValue } from "type-fest";
 import typia from "typia";
-import type { Formatter, LogRecord } from "../types";
+import { sanitizeForSerialization } from "../../utils/sanitize_for_serialization";
+import type { LogRecord } from "../types";
+import type { Formatter } from "./Formatter";
 
-/**
- * A closed, exact shape for log entries.  No index signatures,
- * unions, or intersections—ensures Typia’s generated code never throws.
- */
 interface SerializableLog {
   readonly timestamp: string;
   readonly level: string;
@@ -19,30 +19,41 @@ interface SerializableLog {
 }
 
 /**
- * Formats a LogRecord into a newline-terminated JSON string.
- *
- * We pre-generate a Typia serializer for `SerializableLog` so that
- * serialization is zero-overhead (no `try`/`catch`, no fallback)
- * and handles cyclic structures safely.
+ * JSON formatter that applies cycle-safe sanitization to `meta`,
+ * then uses a precompiled Typia serializer to emit stable JSON.
  */
 export class JsonFormatter implements Formatter {
-  /** AOT-compiled stringify function for our exact record shape. */
+  /** AOT-compiled, Type‐safe stringify for our exact record shape. */
   private static readonly assertStringify =
     typia.json.createAssertStringify<SerializableLog>();
 
   /**
+   * @param sanitizer
+   *   A function that removes cycles and non-JSONable values,
+   *   producing a JsonValue. Defaults to our reusable helper.
+   */
+  public constructor(
+    private readonly sanitizer: (
+      v: unknown,
+    ) => JsonValue = sanitizeForSerialization,
+  ) {}
+
+  /**
    * @param record The raw log record.
-   * @returns A single JSON document (with `\n`) ready for transport.
+   * @returns A single JSON document (ending in `\n`) for transport.
    */
   public format(record: LogRecord): string {
-    const safe: SerializableLog = {
+    const sanitizedMeta =
+      record.meta === undefined ? undefined : this.sanitizer(record.meta);
+
+    const safeRecord: SerializableLog = {
       timestamp: record.timestamp,
       level: record.level,
       message: record.message,
       context: record.context,
-      meta: record.meta,
+      meta: sanitizedMeta,
     };
 
-    return `${JsonFormatter.assertStringify(safe)}\n`;
+    return `${JsonFormatter.assertStringify(safeRecord)}\n`;
   }
 }
