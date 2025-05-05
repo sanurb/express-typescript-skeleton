@@ -7,6 +7,7 @@ import express from "express";
 import responseTime from "response-time";
 
 import { EXPRESS_SETTINGS } from "../config/constants";
+import { compressionMiddleware } from "./middleware/compression.middleware";
 import type { Middleware } from "./types";
 
 export const MIDDLEWARE_PIPELINE: readonly Middleware[] = [
@@ -20,6 +21,10 @@ export const MIDDLEWARE_PIPELINE: readonly Middleware[] = [
   },
   (app) => {
     app.use(express.json({ limit: EXPRESS_SETTINGS.JSON_LIMIT }));
+    return app;
+  },
+  (app) => {
+    app.use(compressionMiddleware);
     return app;
   },
   (app) => {
