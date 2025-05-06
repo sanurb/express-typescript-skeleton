@@ -14,6 +14,12 @@ importers:
       '@agentica/rpc':
         specifier: ^0.21.0
         version: 0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.0)(@samchon/openapi@4.2.0)(openai@4.97.0(zod@3.24.3))(typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3)))(typescript@5.8.3)
+      '@reflet/express':
+        specifier: ^2.0.0
+        version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
+      '@reflet/express-middlewares':
+        specifier: ^2.0.0
+        version: 2.0.0(@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0))(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
       '@reflet/http':
         specifier: 1.0.0
         version: 1.0.0
@@ -526,6 +532,23 @@ packages:
 
   '@paralleldrive/cuid2@2.2.2':
     resolution: {integrity: sha512-ZOBkgDwEdoYVlSeRbYYXs0S9MejQofiVYoTbKzy/6GQa39/q5tQU2IX46+shYnUkpEl3wc+J6wRlar7r2EK2xA==}
+
+  '@reflet/express-middlewares@2.0.0':
+    resolution: {integrity: sha512-o8x9ZPrO4JFy6dkGb1Cojot9w/Fn/9p98bqEMejld6tqFR9n8HrfCCaHLWYqAL460HWkDK8AThcGDN4E8Inxsw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@reflet/express': ^2.0.0
+      '@reflet/http': ^1.0.0
+      '@types/express': ^4.17.0
+      express: ^4.17.0
+
+  '@reflet/express@2.0.0':
+    resolution: {integrity: sha512-cscENtZb6YZtouO+b5VyGd3oUd14JT+zikULggxLBsISXjG0poHs65qHG6s3mV6MRmZZ4bkwGln0MCt/XpxIKw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@reflet/http': ^1.0.0
+      '@types/express': ^4.17.0
+      express: ^4.17.0
 
   '@reflet/http@1.0.0':
     resolution: {integrity: sha512-/wOfIH2eJ3Pph3g+CyFC0sXwDmGO+vdejTpAvz94S3/027x5ItGgdwUJbYZbec9OEEs1KKoHtYi9ZawI/Vsr+A==}
@@ -2566,6 +2589,19 @@ snapshots:
   '@paralleldrive/cuid2@2.2.2':
     dependencies:
       '@noble/hashes': 1.8.0
+
+  '@reflet/express-middlewares@2.0.0(@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0))(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)':
+    dependencies:
+      '@reflet/express': 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
+      '@reflet/http': 1.0.0
+      '@types/express': 5.0.1
+      express: 5.1.0
+
+  '@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)':
+    dependencies:
+      '@reflet/http': 1.0.0
+      '@types/express': 5.0.1
+      express: 5.1.0
 
   '@reflet/http@1.0.0': {}
 
