@@ -2,12 +2,8 @@
   "name": "ultimate-express-typescript",
   "version": "1.0.0",
   "main": "index.js",
-  "imports": {
-    "#src/*": "./src/*",
-    "#tests/*": "./tests/*"
-  },
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "ts-node scripts/rm.ts dist && tsc",
     "typecheck": "tsc --pretty --noEmit",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
@@ -43,6 +39,7 @@
     "dotenv": "^16.4.7",
     "dotenv-expand": "^12.0.1",
     "express": "^5.1.0",
+    "helmet": "^8.1.0",
     "install": "0.13.0",
     "openai": "^4.96.2",
     "pino": "^9.6.0",
@@ -66,6 +63,7 @@
     "supertest": "7.1.0",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.3.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "~5.8.3",
     "vitest": "3.1.2",
     "wait-on": "8.0.3"

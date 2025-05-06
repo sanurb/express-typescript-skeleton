@@ -6,7 +6,7 @@ import type http from "node:http";
 import express, { type Express } from "express";
 import { EventEmitter } from "tseep";
 
-import type { AppEnvironment } from "src/app/config/envs";
+import type { AppEnvironment } from "@/apps/config/envs";
 import { MIDDLEWARE_PIPELINE, applyMiddleware } from "../middleware";
 import { ROUTE_MAPPINGS, applyRoutes } from "../routes";
 import type { HttpServer } from "../types";

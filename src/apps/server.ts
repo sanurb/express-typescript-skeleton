@@ -7,7 +7,7 @@ import express from "express";
 import responseTime from "response-time";
 import { EventEmitter } from "tseep";
 import type { AppEnvironment } from "./config/envs";
-import { healthRouter } from "./health/api/health_router";
+import { healthRouter } from "./core/health/api/health_router";
 
 /**
  * A function that configures middleware on an Express app.

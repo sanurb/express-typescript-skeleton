@@ -2,8 +2,8 @@
  * @fileoverview Application setup: wires config, HTTP server, and process signals.
  */
 
-import { env } from "./app/config/envs";
-import { ExpressHttpServer } from "./app/http/server/express-server";
+import { env } from "./apps/config/envs";
+import { ExpressHttpServer } from "./apps/http/server/express-server";
 import { logger } from "./contexts/shared/logger";
 
 /** Compose all application concerns and launch. */

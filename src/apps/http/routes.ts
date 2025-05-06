@@ -3,7 +3,7 @@
  */
 
 import { ROUTE_PATHS } from "../config/constants";
-import { healthRouter } from "../health/api/health_router";
+import { healthRouter } from "../core/health/api/health_router";
 import type { RouteMapping } from "./types";
 
 /** Immutable list of [path, router] tuples. */
