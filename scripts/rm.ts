@@ -10,7 +10,7 @@ const ROOT_DIR = process.cwd();
 const args = process.argv.slice(2);
 
 if (args.length === 0) {
-  console.error("🛑 rm.ts: Expected at least one argument (path to delete).");
+  console.error("rm.ts: Expected at least one argument (path to delete).");
   process.exit(1);
 }
 

@@ -44,7 +44,7 @@
     ]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["tests/**/*.spec.ts"],
+  "exclude": ["tests/**/*.spec.ts", "node_modules"],
   "ts-node": {
     "files": true,
     "require": ["tsconfig-paths/register"],

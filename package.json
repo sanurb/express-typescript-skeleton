@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "ts-node scripts/rm.ts dist && tsc",
+    "build": "ts-node scripts/rm.ts dist && tsc -p . && tsc-alias",
     "typecheck": "tsc --pretty --noEmit",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
@@ -13,9 +13,15 @@
     "fix:knip": "knip --fix --no-exit-code",
     "format": "biome format --write",
     "dev": "pnpm run --stream --color \"/^watch:/\"",
-    "watch:compile": "tsc --watch",
-    "watch:dev": "wait-on ./dist/index.js && node --watch ./dist/index.js --watch-preserve-output",
+    "watch:compile": "tsc --watch --preserveWatchOutput",
+    "watch:dev": "wait-on ./dist/src/index.js && node -r ts-node/register -r tsconfig-paths/register --watch ./dist/src/index.js --watch-preserve-output",
     "prepare": "ts-patch install && ts-node scripts/prepare-env.ts"
+  },
+  "_moduleAliases": {
+    "@": "dist/src",
+    "@test": "dist/test",
+    "@apps": "dist/src/apps",
+    "@contexts": "dist/src/contexts"
   },
   "repository": {
     "type": "git",
@@ -45,6 +51,7 @@
     "pino": "^9.6.0",
     "response-time": "2.3.3",
     "tgrid": "^1.1.0",
+    "tsc-alias": "^1.8.16",
     "tseep": "^1.3.1",
     "tstl": "^3.0.0",
     "type-fest": "^4.40.1",

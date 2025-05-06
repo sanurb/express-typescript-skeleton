@@ -14,6 +14,7 @@ import responseTime from "response-time";
 import { EXPRESS_SETTINGS } from "../config/constants";
 import { compressionMiddleware } from "./middleware/compression.middleware";
 import { addRequestId } from "./middleware/request_id.middleware";
+import { configureSecurity } from "./server/configure_security";
 import type { Middleware } from "./types";
 
 /**
@@ -50,6 +51,20 @@ export function set<
 }
 
 /**
+ * Wraps `app.disable(key)` as a `Middleware`.
+ *
+ * @param key - the name of the setting to disable (e.g. 'x-powered-by')
+ */
+export function disable<K extends Parameters<Express["disable"]>[0]>(
+  key: K,
+): Middleware {
+  return (app) => {
+    app.disable(key);
+    return app;
+  };
+}
+
+/**
  * Declarative, ordered list of all middleware.
  * To add a new step: import it and call `use(...)` or `set(...)`, no extra wrapper needed.
  */
@@ -60,6 +75,7 @@ export const MIDDLEWARE_PIPELINE = [
   use(json({ limit: EXPRESS_SETTINGS.JSON_LIMIT })),
   use(compressionMiddleware),
   use(urlencoded({ extended: EXPRESS_SETTINGS.URLENCODED_EXTENDED })),
+  configureSecurity,
 ] as const;
 
 /**
