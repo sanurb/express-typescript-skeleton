@@ -4,10 +4,6 @@ export const EXPRESS_SETTINGS = {
   URLENCODED_EXTENDED: true,
 } as const;
 
-export const ROUTE_PATHS = {
-  HEALTH: "/api/health",
-} as const;
-
 export const REQUEST_ID_HEADER = "x-request-id" as const;
 
 export const DEFAULT_CSP_DIRECTIVES = {

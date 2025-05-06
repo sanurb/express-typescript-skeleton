@@ -1,7 +1,14 @@
+import { ROUTES } from "@/apps/http/routes/registry";
+import { Get, Router, Send } from "@reflet/express";
+import { UseStatus } from "@reflet/express-middlewares";
 import { Status } from "@reflet/http";
-import type { Request, Response } from "express";
 
-/** Responds with a 200 OK status and 'OK' message. */
-export function getHealth(_req: Request, res: Response): void {
-  res.status(Status.Ok).send("OK");
+@Send()
+@Router(ROUTES.HEALTH.path)
+export class HealthRouter {
+  @UseStatus(Status.Ok)
+  @Get("/")
+  getHealth(): string {
+    return "OK";
+  }
 }

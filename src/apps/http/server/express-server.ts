@@ -8,7 +8,8 @@ import { EventEmitter } from "tseep";
 
 import type { AppEnvironment } from "@/apps/config/envs";
 import { MIDDLEWARE_PIPELINE, applyMiddleware } from "../middleware";
-import { ROUTE_MAPPINGS, applyRoutes } from "../routes";
+import { applyRoutes } from "../routes/apply_routes";
+import { ROUTE_MAPPINGS } from "../routes/mappings";
 import type { HttpServer } from "../types";
 
 /**
