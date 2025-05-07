@@ -9,6 +9,8 @@ import typia from "typia";
 export interface AppEnvironment {
   OPENAI_API_KEY?: string;
   PORT: `${number}`;
+  HOST: string;
+  HTTPS: `${boolean}`;
 }
 
 const environmentSingleton = new Singleton<AppEnvironment>(

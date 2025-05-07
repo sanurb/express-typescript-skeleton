@@ -1,19 +1,34 @@
 /**
- * @fileoverview Application setup: wires config, HTTP server, and process signals.
+ * @fileoverview
+ * Compose all application concerns and launch.
  */
 
+import { isProduction } from "std-env";
 import { env } from "./apps/config/envs";
+import { ListhenBinding } from "./apps/http/server/binding/listhen-binding";
 import { ExpressHttpServer } from "./apps/http/server/express-server";
+import { castStringToBoolean } from "./contexts/shared/domain/parsing/string_to_boolean";
 import { logger } from "./contexts/shared/logger";
 
-/** Compose all application concerns and launch. */
 export async function bootstrap(): Promise<ExpressHttpServer> {
-  const server = new ExpressHttpServer(env);
+  const binding = isProduction
+    ? undefined // DefaultBinding
+    : new ListhenBinding({
+        port: env.PORT,
+        hostname: env.HOST,
+        https: castStringToBoolean(env.HTTPS),
+        showURL: true,
+        open: false,
+        clipboard: false,
+        qr: true,
+      });
 
-  server.on("beforeStart", () => logger.info("Starting server..."));
-  server.on("afterStart", () =>
-    logger.info(`Server listening on port ${env.PORT}`),
-  );
+  const server = new ExpressHttpServer(env, binding);
+
+  server.on("beforeStart", () => logger.info("Starting server…"));
+  server.on("afterStart", () => {
+    logger.info(`Server listening at ${server.getUrl()}`);
+  });
   server.on("beforeStop", () => logger.info("Stopping server…"));
   server.on("afterStop", () => logger.info("Server stopped."));
 
