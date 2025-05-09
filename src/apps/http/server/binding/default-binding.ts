@@ -29,13 +29,15 @@ class DefaultListener implements HttpListener {
 export class DefaultBinding implements HttpBinding {
   async bind(app: Express, cfg: AppEnvironment): Promise<HttpListener> {
     const server = createServer(app);
-    server.listen(cfg.PORT);
+    server.listen({
+      port: cfg.PORT,
+      host: cfg.HOST ?? "0.0.0.0",
+    });
 
     // wait for the 'listening' event
     await once(server, "listening");
 
-    const host = "0.0.0.0";
-    const url = `http://${host}:${cfg.PORT}`;
+    const url = `http://${cfg.HOST}:${cfg.PORT}`;
     return new DefaultListener(server, url);
   }
 }
