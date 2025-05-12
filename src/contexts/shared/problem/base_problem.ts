@@ -3,6 +3,8 @@
  * RFC7807 core problem detail object.
  */
 
+import type { JsonValue } from "type-fest";
+
 export interface BaseProblem {
   /** A URI identifying the problem’s type. */
   readonly type: string;
@@ -20,5 +22,5 @@ export interface BaseProblem {
   readonly instance?: string;
 
   /** Custom fields: requestId, retryable, tags, serviceId… */
-  extensions?: Record<string, unknown>;
+  extensions?: Record<string, JsonValue>;
 }

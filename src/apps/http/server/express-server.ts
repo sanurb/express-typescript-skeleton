@@ -9,7 +9,10 @@ import express, { type Express } from "express";
 import { EventEmitter } from "tseep";
 
 import type { AppEnvironment } from "@/apps/config/envs";
+import { createAppError } from "@/contexts/shared/problem/app_error";
+import { listenToProcessErrors } from "../../../contexts/shared/problem/error_handler";
 import { MIDDLEWARE_PIPELINE, applyMiddleware } from "../middleware";
+import { expressErrorMiddleware } from "../middleware/express_error.middleware";
 import { applyRoutes } from "../routes/apply_routes";
 import { ROUTE_MAPPINGS } from "../routes/mappings";
 import type { HttpServer } from "../types";
@@ -34,13 +37,29 @@ export class ExpressHttpServer extends EventEmitter implements HttpServer {
   ) {
     super();
     applyMiddleware(this.app, MIDDLEWARE_PIPELINE);
+
     applyRoutes(this.app, ROUTE_MAPPINGS);
+
+    this.app.use((_, __, next) => {
+      next(
+        createAppError({
+          type: "https://httpstatuses.io/404",
+          title: "Not Found",
+          status: 404,
+          detail: "The requested resource was not found",
+        }),
+      );
+    });
+
+    this.app.use(expressErrorMiddleware);
   }
 
   public async start(): Promise<void> {
     this.emit("beforeStart");
 
     this.listener = await this.binding.bind(this.app, this.cfg);
+
+    listenToProcessErrors(this.listener.server);
 
     this.emit("afterStart");
   }
