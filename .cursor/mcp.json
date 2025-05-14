@@ -5,6 +5,10 @@
     },
     "typia Docs": {
       "url": "https://gitmcp.io/samchon/typia"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     }
   }
 }
