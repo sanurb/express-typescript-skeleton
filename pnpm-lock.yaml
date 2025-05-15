@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@agentica/core':
         specifier: 0.21.0
-        version: 0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.2.0)(openai@4.97.0(zod@3.24.4))(typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3))
+        version: 0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
       '@agentica/rpc':
         specifier: 0.21.0
-        version: 0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.2.0)(openai@4.97.0(zod@3.24.4))(typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3)))(typescript@5.8.3)
+        version: 0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
       '@reflet/express':
         specifier: 2.0.0
         version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
@@ -24,8 +24,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       '@samchon/openapi':
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.0
+        version: 4.3.0
       '@types/compression':
         specifier: 1.7.5
         version: 1.7.5
@@ -84,8 +84,8 @@ importers:
         specifier: 4.40.1
         version: 4.40.1
       typia:
-        specifier: 9.1.1
-        version: 9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3)
+        specifier: 9.3.0
+        version: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
       uuid:
         specifier: 11.1.0
         version: 11.1.0
@@ -773,8 +773,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@samchon/openapi@4.2.0':
-    resolution: {integrity: sha512-OIgKBbUtWf0bcv3PRGwm1CbOeZsVC8qGE0H7xXEtUwqbin9O3czhWf9jxP90GGEw55joNJyV2fXZ3eWBm45O5g==}
+  '@samchon/openapi@4.3.0':
+    resolution: {integrity: sha512-PdagymZCUCPmhtfriO+6xYRulds2hgo1ec0LduPFEAOWkZ4viM15iRuEa5wkm9DkDRF/oaMiC+dOgXefmOFZAA==}
 
   '@sideway/address@4.1.5':
     resolution: {integrity: sha512-IqO/DUQHUkPeixNQ8n0JA6102hT9CmaljNTPmQ1u8MEhBo/R4Q8eKLN/vGZxuebwOroDB4cbpjheD4+/sKFK4Q==}
@@ -784,6 +784,9 @@ packages:
 
   '@sideway/pinpoint@2.0.0':
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
+
+  '@standard-schema/spec@1.0.0':
+    resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
   '@total-typescript/ts-reset@0.6.1':
     resolution: {integrity: sha512-cka47fVSo6lfQDIATYqb/vO1nvFfbPw7uWLayIXIhGETj0wcOOlrlkobOMDNQOFr9QOafegUPq13V2+6vtD7yg==}
@@ -2504,11 +2507,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typia@9.1.1:
-    resolution: {integrity: sha512-fMgrd2VLGZoDjZZwWlgriotUiG38UEzcMD0ToJOhQ0bPr966mit0ZEy5TnDhm2RidXfejZOqHb7iOoTG3VHd4w==}
+  typia@9.3.0:
+    resolution: {integrity: sha512-srQSYteGIrMiM36y/8MfqrCYA2RWyk4Bb7Xrlk3Ywfpc7AmmzcxwZkPuC4xOkI1IwRfjkhM7k4wviRb6WtW46g==}
     hasBin: true
     peerDependencies:
-      '@samchon/openapi': '>=4.0.0 <5.0.0'
+      '@samchon/openapi': '>=4.3.0 <5.0.0'
       typescript: '>=4.8.0 <5.9.0'
 
   ufo@1.6.1:
@@ -2723,19 +2726,19 @@ packages:
 
 snapshots:
 
-  '@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.2.0)(openai@4.97.0(zod@3.24.4))(typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3))':
+  '@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))':
     dependencies:
       '@modelcontextprotocol/sdk': 1.11.1
-      '@samchon/openapi': 4.2.0
+      '@samchon/openapi': 4.3.0
       openai: 4.97.0(zod@3.24.4)
-      typia: 9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3)
+      typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
       uuid: 11.1.0
 
-  '@agentica/rpc@0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.2.0)(openai@4.97.0(zod@3.24.4))(typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3)))(typescript@5.8.3)':
+  '@agentica/rpc@0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)':
     dependencies:
-      '@agentica/core': 0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.2.0)(openai@4.97.0(zod@3.24.4))(typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3))
-      '@samchon/openapi': 4.2.0
-      typia: 9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3)
+      '@agentica/core': 0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
+      '@samchon/openapi': 4.3.0
+      typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
     transitivePeerDependencies:
       - typescript
 
@@ -3250,7 +3253,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.40.2':
     optional: true
 
-  '@samchon/openapi@4.2.0': {}
+  '@samchon/openapi@4.3.0': {}
 
   '@sideway/address@4.1.5':
     dependencies:
@@ -3259,6 +3262,8 @@ snapshots:
   '@sideway/formula@3.0.1': {}
 
   '@sideway/pinpoint@2.0.0': {}
+
+  '@standard-schema/spec@1.0.0': {}
 
   '@total-typescript/ts-reset@0.6.1': {}
 
@@ -5014,9 +5019,10 @@ snapshots:
 
   typescript@5.8.3: {}
 
-  typia@9.1.1(@samchon/openapi@4.2.0)(typescript@5.8.3):
+  typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3):
     dependencies:
-      '@samchon/openapi': 4.2.0
+      '@samchon/openapi': 4.3.0
+      '@standard-schema/spec': 1.0.0
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
