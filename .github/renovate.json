@@ -6,8 +6,7 @@
     "customManagers:dockerfileVersions",
     "customManagers:githubActionsVersions",
     ":automergeRequireAllStatusChecks",
-    "helpers:pinGitHubActionDigests",
-    "semanticCommits"
+    "helpers:pinGitHubActionDigests"
   ],
   "timezone": "America/Bogota",
   "labels": ["dependencies"],
@@ -115,6 +114,7 @@
   "rangeStrategy": "pin",
   "separateMajorMinor": true,
   "separateMultipleMajor": true,
+  "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps"
 }
