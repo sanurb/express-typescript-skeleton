@@ -6,7 +6,8 @@
     "customManagers:dockerfileVersions",
     "customManagers:githubActionsVersions",
     ":automergeRequireAllStatusChecks",
-    "helpers:pinGitHubActionDigests"
+    "helpers:pinGitHubActionDigests",
+    "semanticCommits"
   ],
   "timezone": "America/Bogota",
   "labels": ["dependencies"],
@@ -17,20 +18,14 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
+      "groupName": "All minor and patch updates",
+      "groupSlug": "minor-patch",
       "automerge": true
     },
     {
-      "matchPackageNames": ["@biomejs/biome"],
-      "groupName": "biome",
-      "groupSlug": "biome",
-      "automerge": true
-    },
-    {
-      "matchPackageNames": ["typescript", "/^@types//", "/^ts-/"],
+      "matchPackageNames": ["typescript", "/^@types\\//"],
       "groupName": "TypeScript and type definitions",
-      "groupSlug": "typescript",
+      "groupSlug": "typescript-types",
       "automerge": true
     },
     {
@@ -38,11 +33,81 @@
         "vitest",
         "@vitest/coverage-v8",
         "supertest",
-        "@types/supertest"
+        "@types/supertest",
+        "@amiceli/vitest-cucumber"
       ],
-      "groupName": "Testing packages",
+      "groupName": "Testing tools",
       "groupSlug": "testing",
       "automerge": true
+    },
+    {
+      "matchPackageNames": ["@biomejs/biome", "knip"],
+      "groupName": "Static analysis tools",
+      "groupSlug": "static-analysis",
+      "automerge": true
+    },
+    {
+      "matchPackageNames": [
+        "ts-node",
+        "ts-patch",
+        "tsconfig-paths",
+        "@total-typescript/ts-reset"
+      ],
+      "groupName": "TypeScript tooling",
+      "groupSlug": "ts-tooling",
+      "automerge": true
+    },
+    {
+      "matchPackageNames": [
+        "@commitlint/cli",
+        "@commitlint/config-conventional",
+        "@commitlint/types",
+        "lefthook"
+      ],
+      "groupName": "Git hooks and commit conventions",
+      "groupSlug": "git-hooks",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["^@agentica/"],
+      "groupName": "Agentica SDK",
+      "groupSlug": "agentica",
+      "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["^@reflet/"],
+      "groupName": "Express decorators",
+      "groupSlug": "reflet",
+      "automerge": false
+    },
+    {
+      "matchPackageNames": [
+        "express",
+        "helmet",
+        "compression",
+        "response-time"
+      ],
+      "groupName": "HTTP server and middleware",
+      "groupSlug": "http-middleware",
+      "automerge": false
+    },
+    {
+      "matchPackageNames": ["dotenv", "dotenv-expand", "std-env"],
+      "groupName": "Environment tools",
+      "groupSlug": "env",
+      "automerge": true
+    },
+    {
+      "matchPackageNames": ["uuid", "type-fest", "tstl", "tgrid", "openai"],
+      "groupName": "Utility libraries",
+      "groupSlug": "utils",
+      "automerge": false
+    },
+    {
+      "matchPackageNames": ["pino", "pino-pretty"],
+      "groupName": "Logging",
+      "groupSlug": "logging",
+      "automerge": false
     }
   ],
   "prHourlyLimit": 4,
@@ -50,5 +115,6 @@
   "rangeStrategy": "pin",
   "separateMajorMinor": true,
   "separateMultipleMajor": true,
-  "commitMessagePrefix": "⬆️ "
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps"
 }
