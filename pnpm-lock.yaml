@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@agentica/core':
         specifier: 0.25.0
-        version: 0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
+        version: 0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
       '@agentica/rpc':
         specifier: 0.25.0
-        version: 0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
+        version: 0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
       '@reflet/express':
         specifier: 2.0.0
         version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
@@ -57,8 +57,8 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       openai:
-        specifier: 4.97.0
-        version: 4.97.0(zod@3.24.4)
+        specifier: 4.100.0
+        version: 4.100.0(zod@3.24.4)
       pino:
         specifier: 9.6.0
         version: 9.6.0
@@ -81,8 +81,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       type-fest:
-        specifier: 4.40.1
-        version: 4.40.1
+        specifier: 4.41.0
+        version: 4.41.0
       typia:
         specifier: 9.3.0
         version: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
@@ -1987,8 +1987,8 @@ packages:
     resolution: {integrity: sha512-1FlR+gjXK7X+AsAHso35MnyN5KqGwJRi/31ft6x0M194ht7S+rWAvd7PHss9xSKMzE0asv1pyIHaJYq+BbacAQ==}
     engines: {node: '>=12'}
 
-  openai@4.97.0:
-    resolution: {integrity: sha512-LRoiy0zvEf819ZUEJhgfV8PfsE8G5WpQi4AwA1uCV8SKvvtXQkoWUFkepD6plqyJQRghy2+AEPQ07FrJFKHZ9Q==}
+  openai@4.100.0:
+    resolution: {integrity: sha512-9soq/wukv3utxcuD7TWFqKdKp0INWdeyhUCvxwrne5KwnxaCp4eHL4GdT/tMFhYolxgNhxFzg5GFwM331Z5CZg==}
     hasBin: true
     peerDependencies:
       ws: ^8.18.0
@@ -2463,8 +2463,8 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
 
-  type-fest@4.40.1:
-    resolution: {integrity: sha512-9YvLNnORDpI+vghLU/Nf+zSv0kL47KbVJ1o3sKgoTefl6i+zebxbiDQWoe/oWWqPhIgQdRZRT1KA9sCPL810SA==}
+  type-fest@4.41.0:
+    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
 
   type-is@2.0.1:
@@ -2690,16 +2690,16 @@ packages:
 
 snapshots:
 
-  '@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))':
+  '@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))':
     dependencies:
       '@samchon/openapi': 4.3.0
-      openai: 4.97.0(zod@3.24.4)
+      openai: 4.100.0(zod@3.24.4)
       typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
       uuid: 11.1.0
 
-  '@agentica/rpc@0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)':
+  '@agentica/rpc@0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)':
     dependencies:
-      '@agentica/core': 0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
+      '@agentica/core': 0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
       '@samchon/openapi': 4.3.0
       typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
     transitivePeerDependencies:
@@ -4406,7 +4406,7 @@ snapshots:
     dependencies:
       mimic-fn: 4.0.0
 
-  openai@4.97.0(zod@3.24.4):
+  openai@4.100.0(zod@3.24.4):
     dependencies:
       '@types/node': 18.19.100
       '@types/node-fetch': 2.6.12
@@ -4938,7 +4938,7 @@ snapshots:
 
   type-fest@0.21.3: {}
 
-  type-fest@4.40.1: {}
+  type-fest@4.41.0: {}
 
   type-is@2.0.1:
     dependencies:
