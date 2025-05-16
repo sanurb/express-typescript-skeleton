@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@agentica/core':
-        specifier: 0.21.0
-        version: 0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
+        specifier: 0.25.0
+        version: 0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
       '@agentica/rpc':
-        specifier: 0.21.0
-        version: 0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
+        specifier: 0.25.0
+        version: 0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
       '@reflet/express':
         specifier: 2.0.0
         version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
@@ -147,18 +147,17 @@ importers:
 
 packages:
 
-  '@agentica/core@0.21.0':
-    resolution: {integrity: sha512-2vNOX05alOAs6zX8I0SDS8ewh4orordj5r5TFpw/LA0JC23RSYWUtPZGpCqfmOkGQqqs94wBXTIFQkomVdI5KA==}
+  '@agentica/core@0.25.0':
+    resolution: {integrity: sha512-3iZBmM12sssOME+fbEt2/n/MZIQynqg6mdCzUOAf8UWBK7j4MpbMOSzboX4KqrS4I3R5hCcexWEtXfD1W3R3kw==}
     peerDependencies:
-      '@modelcontextprotocol/sdk': ^1.9.0
-      '@samchon/openapi': ^4.2.0
+      '@samchon/openapi': ^4.3.0
       openai: ^4.80.0
-      typia: ^9.0.1
+      typia: ^9.3.0
 
-  '@agentica/rpc@0.21.0':
-    resolution: {integrity: sha512-ndNPs71XYs36yDfI/nsu/S4o0rSK3GMIE+WKsZ5gIDu0JvGS5fiMGqeAbov7UtKjHu7LZslEHAGrrZH6b85zyg==}
+  '@agentica/rpc@0.25.0':
+    resolution: {integrity: sha512-w8kN4tIyDQrHYzulkp7PmNYl6z86NtCFtfTPIKDrukWhyoQnc2+zMZy7bwrMR39MOI8JatrcYX5xBx1lEMMxXg==}
     peerDependencies:
-      '@agentica/core': ^0.21.0
+      '@agentica/core': ^0.25.0
 
   '@amiceli/vitest-cucumber@5.0.0':
     resolution: {integrity: sha512-zPDqTs/J25VrfGvJmJxY/ApMkAfXw9zJzGXVtv1rLtfoeJ6Yl2IK3Yb6cHxqqNEJQgYgkNbVmEX/kksC1+xUBw==}
@@ -472,10 +471,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
-
-  '@modelcontextprotocol/sdk@1.11.1':
-    resolution: {integrity: sha512-9LfmxKTb1v+vUS1/emSk1f5ePmTLkb9Le9AxOB5T0XM59EUumwcS45z05h7aiZx3GI0Bl7mjb3FMEglYj+acuQ==}
-    engines: {node: '>=18'}
 
   '@napi-rs/wasm-runtime@0.2.9':
     resolution: {integrity: sha512-OKRBiajrrxB9ATokgEQoG87Z25c67pCpYcCwmXYX8PBftC9pBfN18gnm/fh1wurSLEKIAt+QRFLFCQISrb66Jg==}
@@ -1176,10 +1171,6 @@ packages:
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
-  cors@2.8.5:
-    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
-    engines: {node: '>= 0.10'}
-
   cosmiconfig-typescript-loader@6.1.0:
     resolution: {integrity: sha512-tJ1w35ZRUiM5FeTzT7DtYWAFFv37ZLqSRkGi2oeCK1gPhvaWjkAtfXvLmvE1pRfxxp9aQo6ba/Pvg1dKj05D4g==}
     engines: {node: '>=v18'}
@@ -1359,14 +1350,6 @@ packages:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
 
-  eventsource-parser@3.0.1:
-    resolution: {integrity: sha512-VARTJ9CYeuQYb0pZEPbzi740OWFgpHe7AYJ2WFZVnUDUQp5Dk2yJUgF36YsZ81cOyxT0QxmXD2EQpapAouzWVA==}
-    engines: {node: '>=18.0.0'}
-
-  eventsource@3.0.7:
-    resolution: {integrity: sha512-CRT1WTyuQoD771GW56XEZFQ/ZoSfWid1alKGDYMmkt2yl8UXrVR4pspqWNEcqKvVIzg6PAltWjxcSSPrboA4iA==}
-    engines: {node: '>=18.0.0'}
-
   execa@8.0.1:
     resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
     engines: {node: '>=16.17'}
@@ -1374,12 +1357,6 @@ packages:
   expect-type@1.2.1:
     resolution: {integrity: sha512-/kP8CAwxzLVEeFrMm4kMmy4CCDlpipyA7MYLVrdJIkV0fYF0UaigQHRsxHiuY/GEea+bh4KSv3TIlgr+2UL6bw==}
     engines: {node: '>=12.0.0'}
-
-  express-rate-limit@7.5.0:
-    resolution: {integrity: sha512-eB5zbQh5h+VenMPM3fh+nw1YExi5nMr6HUCR62ELSP11huvxm/Uir1H1QEyTkk5QX6A58pX6NmaTMceKZ0Eodg==}
-    engines: {node: '>= 16'}
-    peerDependencies:
-      express: ^4.11 || 5 || ^5.0.0-beta.1
 
   express@5.1.0:
     resolution: {integrity: sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==}
@@ -1983,10 +1960,6 @@ packages:
     resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  object-assign@4.1.1:
-    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
-    engines: {node: '>=0.10.0'}
-
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
     engines: {node: '>= 0.4'}
@@ -2123,10 +2096,6 @@ packages:
   pino@9.6.0:
     resolution: {integrity: sha512-i85pKRCt4qMjZ1+L7sy2Ag4t1atFcdbEt76+7iRJn1g2BvsnRMGu9p8pivl9fs63M2kF/A0OacFZhTub+m/qMg==}
     hasBin: true
-
-  pkce-challenge@5.0.0:
-    resolution: {integrity: sha512-ueGLflrrnvwB3xuo/uGob5pd5FN7l0MsLf0Z87o/UQmRtwjvfylfc9MurIxRAWywCYTgrvpXBcqjV4OfCYGCIQ==}
-    engines: {node: '>=16.20.0'}
 
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
@@ -2710,11 +2679,6 @@ packages:
     resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
 
-  zod-to-json-schema@3.24.5:
-    resolution: {integrity: sha512-/AuWwMP+YqiPbsJx5D6TfgRTc4kTLjsh5SOcd4bLsfUg2RcEXrFMJl1DGgdHy2aCfsIA/cr/1JM0xcB2GZji8g==}
-    peerDependencies:
-      zod: ^3.24.1
-
   zod-validation-error@3.4.1:
     resolution: {integrity: sha512-1KP64yqDPQ3rupxNv7oXhf7KdhHHgaqbKuspVoiN93TT0xrBjql+Svjkdjq/Qh/7GSMmgQs3AfvBT0heE35thw==}
     engines: {node: '>=18.0.0'}
@@ -2726,17 +2690,16 @@ packages:
 
 snapshots:
 
-  '@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))':
+  '@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))':
     dependencies:
-      '@modelcontextprotocol/sdk': 1.11.1
       '@samchon/openapi': 4.3.0
       openai: 4.97.0(zod@3.24.4)
       typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
       uuid: 11.1.0
 
-  '@agentica/rpc@0.21.0(@agentica/core@0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)':
+  '@agentica/rpc@0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)':
     dependencies:
-      '@agentica/core': 0.21.0(@modelcontextprotocol/sdk@1.11.1)(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
+      '@agentica/core': 0.25.0(@samchon/openapi@4.3.0)(openai@4.97.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
       '@samchon/openapi': 4.3.0
       typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
     transitivePeerDependencies:
@@ -3031,21 +2994,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
-
-  '@modelcontextprotocol/sdk@1.11.1':
-    dependencies:
-      content-type: 1.0.5
-      cors: 2.8.5
-      cross-spawn: 7.0.6
-      eventsource: 3.0.7
-      express: 5.1.0
-      express-rate-limit: 7.5.0(express@5.1.0)
-      pkce-challenge: 5.0.0
-      raw-body: 3.0.0
-      zod: 3.24.4
-      zod-to-json-schema: 3.24.5(zod@3.24.4)
-    transitivePeerDependencies:
-      - supports-color
 
   '@napi-rs/wasm-runtime@0.2.9':
     dependencies:
@@ -3693,11 +3641,6 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cors@2.8.5:
-    dependencies:
-      object-assign: 4.1.1
-      vary: 1.1.2
-
   cosmiconfig-typescript-loader@6.1.0(@types/node@22.15.18)(cosmiconfig@9.0.0(typescript@5.8.3))(typescript@5.8.3):
     dependencies:
       '@types/node': 22.15.18
@@ -3860,12 +3803,6 @@ snapshots:
 
   event-target-shim@5.0.1: {}
 
-  eventsource-parser@3.0.1: {}
-
-  eventsource@3.0.7:
-    dependencies:
-      eventsource-parser: 3.0.1
-
   execa@8.0.1:
     dependencies:
       cross-spawn: 7.0.6
@@ -3879,10 +3816,6 @@ snapshots:
       strip-final-newline: 3.0.0
 
   expect-type@1.2.1: {}
-
-  express-rate-limit@7.5.0(express@5.1.0):
-    dependencies:
-      express: 5.1.0
 
   express@5.1.0:
     dependencies:
@@ -4451,8 +4384,6 @@ snapshots:
     dependencies:
       path-key: 4.0.0
 
-  object-assign@4.1.1: {}
-
   object-inspect@1.13.4: {}
 
   on-exit-leak-free@2.1.2: {}
@@ -4607,8 +4538,6 @@ snapshots:
       safe-stable-stringify: 2.5.0
       sonic-boom: 4.2.0
       thread-stream: 3.1.0
-
-  pkce-challenge@5.0.0: {}
 
   pkg-types@1.3.1:
     dependencies:
@@ -5204,10 +5133,6 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@1.2.1: {}
-
-  zod-to-json-schema@3.24.5(zod@3.24.4):
-    dependencies:
-      zod: 3.24.4
 
   zod-validation-error@3.4.1(zod@3.24.4):
     dependencies:
