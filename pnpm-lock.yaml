@@ -16,10 +16,10 @@ importers:
         version: 0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
       '@reflet/express':
         specifier: 2.0.0
-        version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
+        version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0)
       '@reflet/express-middlewares':
         specifier: 2.0.0
-        version: 2.0.0(@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0))(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
+        version: 2.0.0(@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0))(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0)
       '@reflet/http':
         specifier: 1.0.0
         version: 1.0.0
@@ -30,8 +30,8 @@ importers:
         specifier: 1.7.5
         version: 1.7.5
       '@types/express':
-        specifier: 5.0.1
-        version: 5.0.1
+        specifier: 5.0.2
+        version: 5.0.2
       '@types/response-time':
         specifier: 2.3.8
         version: 2.3.8
@@ -825,8 +825,8 @@ packages:
   '@types/express-serve-static-core@5.0.6':
     resolution: {integrity: sha512-3xhRnjJPkULekpSzgtoNYYcTWgEZkp4myc+Saevii5JPnHNvHMRlBSHDbs7Bh1iPPoVTERHEZXyhyLbMEsExsA==}
 
-  '@types/express@5.0.1':
-    resolution: {integrity: sha512-UZUw8vjpWFXuDnjFTh7/5c2TWDlQqeXHi6hcN7F2XSVT5P+WmUnnbFS3KA6Jnc6IsEqI2qCVu2bK0R0J4A8ZQQ==}
+  '@types/express@5.0.2':
+    resolution: {integrity: sha512-BtjL3ZwbCQriyb0DGw+Rt12qAXPiBTPs815lsUvtt1Grk0vLRMZNMUZ741d5rjk+UQOxfDiBZ3dxpX00vSkK3g==}
 
   '@types/http-errors@2.0.4':
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
@@ -3126,17 +3126,17 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.5.1
       '@parcel/watcher-win32-x64': 2.5.1
 
-  '@reflet/express-middlewares@2.0.0(@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0))(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)':
+  '@reflet/express-middlewares@2.0.0(@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0))(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0)':
     dependencies:
-      '@reflet/express': 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)
+      '@reflet/express': 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0)
       '@reflet/http': 1.0.0
-      '@types/express': 5.0.1
+      '@types/express': 5.0.2
       express: 5.1.0
 
-  '@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.1)(express@5.1.0)':
+  '@reflet/express@2.0.0(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0)':
     dependencies:
       '@reflet/http': 1.0.0
-      '@types/express': 5.0.1
+      '@types/express': 5.0.2
       express: 5.1.0
 
   '@reflet/http@1.0.0': {}
@@ -3241,7 +3241,7 @@ snapshots:
 
   '@types/compression@1.7.5':
     dependencies:
-      '@types/express': 5.0.1
+      '@types/express': 5.0.2
 
   '@types/connect@3.4.38':
     dependencies:
@@ -3262,7 +3262,7 @@ snapshots:
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
 
-  '@types/express@5.0.1':
+  '@types/express@5.0.2':
     dependencies:
       '@types/body-parser': 1.19.5
       '@types/express-serve-static-core': 5.0.6
@@ -3297,7 +3297,7 @@ snapshots:
 
   '@types/response-time@2.3.8':
     dependencies:
-      '@types/express': 5.0.1
+      '@types/express': 5.0.2
       '@types/node': 22.15.18
 
   '@types/send@0.17.4':

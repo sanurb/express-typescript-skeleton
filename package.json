@@ -41,7 +41,7 @@
     "@reflet/http": "1.0.0",
     "@samchon/openapi": "4.3.0",
     "@types/compression": "1.7.5",
-    "@types/express": "5.0.1",
+    "@types/express": "5.0.2",
     "@types/response-time": "2.3.8",
     "compression": "1.8.0",
     "dotenv": "16.5.0",
