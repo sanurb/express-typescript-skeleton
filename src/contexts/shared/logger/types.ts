@@ -1,17 +1,27 @@
 import type { JsonValue } from "type-fest";
 
-export type LogLevel =
-  | "trace"
-  | "debug"
-  | "info"
-  | "warn"
-  | "error"
-  | "fatal"
-  | "silent";
+export const LOG_LEVELS = [
+  "trace",
+  "debug",
+  "info",
+  "warn",
+  "error",
+  "fatal",
+  "silent",
+] as const;
 
-export type LogFormat = "json" | "pretty";
+export type LogLevelAsType = typeof LOG_LEVELS;
+export type LogLevel = LogLevelAsType[number];
 
-export type TransportType = "console" | "pino" | "pretty";
+export const LOG_FORMATS = ["json", "pretty"] as const;
+
+export type LogFormatAsType = typeof LOG_FORMATS;
+export type LogFormat = LogFormatAsType[number];
+
+export const TRANSPORT_TYPES = ["console", "pino", "pretty"] as const;
+
+export type TransportTypeAsType = typeof TRANSPORT_TYPES;
+export type TransportType = TransportTypeAsType[number];
 
 /**
  * Global logger configuration, validated at startup.

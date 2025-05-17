@@ -3,11 +3,11 @@
  * Avoids switch/case to honor Open/Closed: new plugins register themselves.
  */
 
-import type { Formatter, Transport, TransportType } from "./types";
+import type { Formatter, LogFormat, Transport, TransportType } from "./types";
 
 const formatterMap = new Map<string, () => Formatter>();
 export function registerFormatter(
-  format: string,
+  format: LogFormat,
   factory: () => Formatter,
 ): void {
   formatterMap.set(format, factory);

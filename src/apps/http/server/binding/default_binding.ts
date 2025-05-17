@@ -8,7 +8,7 @@ import { createServer } from "node:http";
 import type { Express } from "express";
 
 import type { AppEnvironment } from "@/apps/config/envs";
-import type { HttpBinding, HttpListener } from "./http-binding";
+import type { HttpBinding, HttpListener } from "./http_binding.interface";
 
 class DefaultListener implements HttpListener {
   constructor(

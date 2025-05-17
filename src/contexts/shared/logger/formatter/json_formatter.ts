@@ -8,15 +8,8 @@ import type { JsonValue } from "type-fest";
 import typia from "typia";
 import { sanitizeForSerialization } from "../../utils/sanitize_for_serialization";
 import type { LogRecord } from "../types";
-import type { Formatter } from "./Formatter";
-
-interface SerializableLog {
-  readonly timestamp: string;
-  readonly level: string;
-  readonly message: string;
-  readonly context?: string;
-  readonly meta?: unknown;
-}
+import type { Formatter } from "./formatter.interface";
+import type { SerializableLog } from "./serializable_log.interface";
 
 /**
  * JSON formatter that applies cycle-safe sanitization to `meta`,
