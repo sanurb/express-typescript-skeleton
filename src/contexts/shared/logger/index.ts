@@ -3,21 +3,22 @@
  * transports, and dispatcher into the public Logger API.
  */
 
+import { isProduction } from "std-env";
 import { Singleton } from "tstl";
 import { DEFAULT_LOGGER_CONFIG, DEV_LOGGER_CONFIG } from "./constants";
-import { defaultCorrelationContext } from "./correlation/CorrelationContext";
-import { DefaultLogDispatcher } from "./dispatcher/LogDispatcher";
-import { CorrelationEnricher } from "./enricher/CorrelationEnricher";
-import { StaticContextEnricher } from "./enricher/StaticContextEnricher";
-import { DefaultLogRecordFactory } from "./factory/LogRecordFactory";
-import { JsonFormatter } from "./formatter/JsonFormatter";
-import { PrettyFormatter } from "./formatter/PrettyFormatter";
+import { defaultCorrelationContext } from "./correlation/correlation_context";
+import { DefaultLogDispatcher } from "./dispatcher/log_dispatcher";
+import { CorrelationEnricher } from "./enricher/correlation_enricher";
+import { StaticContextEnricher } from "./enricher/static_context_enricher";
+import { DefaultLogRecordFactory } from "./factory/log_record_factory";
+import { JsonFormatter } from "./formatter/json_formatter";
+import { PrettyFormatter } from "./formatter/pretty_formatter";
 import { isLevelEnabled } from "./level";
 import { registerFormatter, resolveFormatter } from "./registry";
 import { registerTransport, resolveTransport } from "./registry";
-import { ConsoleTransport } from "./transport/ConsoleTransport";
-import { PinoTransport } from "./transport/PinoTransport";
-import { PrettyTransport } from "./transport/PrettyTransport";
+import { ConsoleTransport } from "./transport/console_transport";
+import { PinoTransport } from "./transport/pino_transport";
+import { PrettyTransport } from "./transport/pretty_transport";
 import type {
   Formatter,
   LogEnricher,
@@ -52,9 +53,11 @@ registerTransport(
     }),
 );
 
-export function createLogger(overrides?: Partial<LoggerConfig>): Logger {
+export function createLogger(
+  overrides?: Partial<Readonly<LoggerConfig>>,
+): Logger {
   const base = { ...DEFAULT_LOGGER_CONFIG };
-  if (process.env.NODE_ENV !== "production") {
+  if (!isProduction) {
     Object.assign(base, DEV_LOGGER_CONFIG);
   }
   const cfg = { ...base, ...overrides };

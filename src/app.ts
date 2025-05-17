@@ -4,8 +4,8 @@
  */
 
 import { env } from "./apps/config/envs";
-import { ListhenBinding } from "./apps/http/server/binding/listhen-binding";
-import { ExpressHttpServer } from "./apps/http/server/express-server";
+import { ListhenBinding } from "./apps/http/server/binding/listhen_binding";
+import { ExpressHttpServer } from "./apps/http/server/express_server";
 import { castStringToBoolean } from "./contexts/shared/domain/parsing/string_to_boolean";
 import { logger } from "./contexts/shared/logger";
 

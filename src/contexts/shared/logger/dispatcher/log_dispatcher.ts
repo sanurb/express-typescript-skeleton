@@ -1,5 +1,5 @@
 import { EventEmitter } from "tseep";
-import { LOG_LEVELS } from "../level";
+import { LOG_LEVELS } from "../types";
 import type {
   LogDispatcher,
   LogLevel,
@@ -29,7 +29,7 @@ export class DefaultLogDispatcher
 {
   private readonly entries: readonly TransportEntry[];
 
-  constructor(cfg: LoggerConfig, transports: readonly Transport[]) {
+  constructor(cfg: Readonly<LoggerConfig>, transports: readonly Transport[]) {
     super();
     this.entries = transports.map((t) => {
       const ctor = t.constructor as unknown as TypedTransportConstructor;

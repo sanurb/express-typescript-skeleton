@@ -6,7 +6,7 @@
 import type { Express } from "express";
 import { listen } from "listhen";
 
-import type { HttpBinding, HttpListener } from "./http-binding";
+import type { HttpBinding, HttpListener } from "./http_binding.interface";
 
 class ListhenListener implements HttpListener {
   constructor(private readonly listener: Awaited<ReturnType<typeof listen>>) {}

@@ -16,8 +16,8 @@ import { expressErrorMiddleware } from "../middleware/express_error.middleware";
 import { applyRoutes } from "../routes/apply_routes";
 import { ROUTE_MAPPINGS } from "../routes/mappings";
 import type { HttpServer } from "../types";
-import { DefaultBinding } from "./binding/default-binding";
-import type { HttpBinding } from "./binding/http-binding";
+import { DefaultBinding } from "./binding/default_binding";
+import type { HttpBinding } from "./binding/http_binding.interface";
 
 /**
  * Concrete HttpServer that uses Express under the hood and

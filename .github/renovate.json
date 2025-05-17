@@ -14,7 +14,8 @@
   "labels": ["dependencies"],
   "dependencyDashboard": true,
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "automerge": true
   },
   "packageRules": [
     {

@@ -2,18 +2,7 @@
  * @fileoverview Log‐level ordering and comparison helper.
  */
 
-import type { LogLevel } from "./types";
-
-/** Defines the order of log levels for comparisons. */
-export const LOG_LEVELS: readonly LogLevel[] = [
-  "trace",
-  "debug",
-  "info",
-  "warn",
-  "error",
-  "fatal",
-  "silent",
-] as const;
+import { LOG_LEVELS, type LogLevel } from "./types";
 
 /**
  * Returns true if `level` is at or above (i.e. as severe as)

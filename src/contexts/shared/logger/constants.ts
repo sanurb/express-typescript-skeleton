@@ -12,6 +12,6 @@ export const DEFAULT_LOGGER_CONFIG = {
 } satisfies LoggerConfig;
 
 export const DEV_LOGGER_CONFIG: Partial<LoggerConfig> = {
-  format: "json",
+  format: "pretty",
   transports: ["pretty"],
 };
