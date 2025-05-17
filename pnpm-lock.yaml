@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@agentica/core':
-        specifier: 0.25.0
-        version: 0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
-      '@agentica/rpc':
-        specifier: 0.25.0
-        version: 0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)
       '@reflet/express':
         specifier: 2.0.0
         version: 2.0.0(@reflet/http@1.0.0)(@types/express@5.0.2)(express@5.1.0)
@@ -146,18 +140,6 @@ importers:
         version: 8.0.3
 
 packages:
-
-  '@agentica/core@0.25.0':
-    resolution: {integrity: sha512-3iZBmM12sssOME+fbEt2/n/MZIQynqg6mdCzUOAf8UWBK7j4MpbMOSzboX4KqrS4I3R5hCcexWEtXfD1W3R3kw==}
-    peerDependencies:
-      '@samchon/openapi': ^4.3.0
-      openai: ^4.80.0
-      typia: ^9.3.0
-
-  '@agentica/rpc@0.25.0':
-    resolution: {integrity: sha512-w8kN4tIyDQrHYzulkp7PmNYl6z86NtCFtfTPIKDrukWhyoQnc2+zMZy7bwrMR39MOI8JatrcYX5xBx1lEMMxXg==}
-    peerDependencies:
-      '@agentica/core': ^0.25.0
 
   '@amiceli/vitest-cucumber@5.0.0':
     resolution: {integrity: sha512-zPDqTs/J25VrfGvJmJxY/ApMkAfXw9zJzGXVtv1rLtfoeJ6Yl2IK3Yb6cHxqqNEJQgYgkNbVmEX/kksC1+xUBw==}
@@ -2689,21 +2671,6 @@ packages:
     resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
 
 snapshots:
-
-  '@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))':
-    dependencies:
-      '@samchon/openapi': 4.3.0
-      openai: 4.100.0(zod@3.24.4)
-      typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
-      uuid: 11.1.0
-
-  '@agentica/rpc@0.25.0(@agentica/core@0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)))(typescript@5.8.3)':
-    dependencies:
-      '@agentica/core': 0.25.0(@samchon/openapi@4.3.0)(openai@4.100.0(zod@3.24.4))(typia@9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3))
-      '@samchon/openapi': 4.3.0
-      typia: 9.3.0(@samchon/openapi@4.3.0)(typescript@5.8.3)
-    transitivePeerDependencies:
-      - typescript
 
   '@amiceli/vitest-cucumber@5.0.0(@types/node@22.15.18)(jiti@2.4.2)':
     dependencies:
