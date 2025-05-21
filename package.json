@@ -37,7 +37,7 @@
     "@reflet/express": "2.0.0",
     "@reflet/express-middlewares": "2.0.0",
     "@reflet/http": "1.0.0",
-    "@samchon/openapi": "4.3.2",
+    "@samchon/openapi": "4.3.3",
     "@types/compression": "1.7.5",
     "@types/express": "5.0.2",
     "@types/response-time": "2.3.8",
