@@ -69,7 +69,7 @@
     "@total-typescript/ts-reset": "0.6.1",
     "@types/node": "22.15.21",
     "@types/supertest": "6.0.3",
-    "knip": "5.57.2",
+    "knip": "5.58.0",
     "lefthook": "1.11.13",
     "pino-pretty": "13.0.0",
     "supertest": "7.1.1",
