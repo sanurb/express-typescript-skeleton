@@ -85,8 +85,8 @@ importers:
         version: 11.1.0
     devDependencies:
       '@amiceli/vitest-cucumber':
-        specifier: 5.0.0
-        version: 5.0.0(@types/node@22.15.29)(jiti@2.4.2)
+        specifier: 5.1.0
+        version: 5.1.0(@types/node@22.15.29)(jiti@2.4.2)
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
@@ -141,8 +141,8 @@ importers:
 
 packages:
 
-  '@amiceli/vitest-cucumber@5.0.0':
-    resolution: {integrity: sha512-zPDqTs/J25VrfGvJmJxY/ApMkAfXw9zJzGXVtv1rLtfoeJ6Yl2IK3Yb6cHxqqNEJQgYgkNbVmEX/kksC1+xUBw==}
+  '@amiceli/vitest-cucumber@5.1.0':
+    resolution: {integrity: sha512-m/J2FqWqns3mZ+S2Yp3cl7rQz69NBkBBw/bokH7QNSxpDMtjAWYFFye7zI2TgxJbWXIdafVafsrjDlv9Pub3rA==}
     hasBin: true
 
   '@babel/code-frame@7.27.1':
@@ -2672,9 +2672,10 @@ packages:
 
 snapshots:
 
-  '@amiceli/vitest-cucumber@5.0.0(@types/node@22.15.29)(jiti@2.4.2)':
+  '@amiceli/vitest-cucumber@5.1.0(@types/node@22.15.29)(jiti@2.4.2)':
     dependencies:
       callsites: 4.2.0
+      minimist: 1.2.8
       parsecurrency: 1.1.1
       ts-morph: 25.0.1
       vitest: 3.1.4(@types/node@22.15.29)(jiti@2.4.2)
