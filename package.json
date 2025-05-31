@@ -61,7 +61,7 @@
     "uuid": "11.1.0"
   },
   "devDependencies": {
-    "@amiceli/vitest-cucumber": "5.0.0",
+    "@amiceli/vitest-cucumber": "5.1.0",
     "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
