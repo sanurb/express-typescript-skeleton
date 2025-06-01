@@ -32,4 +32,4 @@ USER node
 EXPOSE 8080
 
 # Start the server
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/src/index.js"]

@@ -1,5 +1,15 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "assist": {
+    "enabled": true,
+    "includes": ["**"],
+    "actions": {
+      "source": {
+        "useSortedKeys": "off",
+        "organizeImports": "on"
+      }
+    }
+  },
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,7 +17,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["dist"]
+    "includes": ["**", "!**/dist"]
   },
   "formatter": {
     "enabled": true,
@@ -17,9 +27,6 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto"
-  },
-  "organizeImports": {
-    "enabled": true
   },
   "javascript": {
     "formatter": {
@@ -41,6 +48,35 @@
     "parser": {
       "allowComments": false,
       "allowTrailingCommas": false
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "style": {
+        "noParameterAssign": "error",
+        "useDefaultParameterLast": "error",
+        "useSingleVarDeclarator": "error",
+        "useConst": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error",
+        "useSelfClosingElements": "error",
+        "useNumberNamespace": "error",
+        "useAsConstAssertion": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useTemplate": "error",
+        "useEnumInitializers": "error"
+      },
+      "correctness": {
+        "noUndeclaredDependencies": "error"
+      },
+      "suspicious": {
+        "noVar": "on"
+      },
+      "nursery": {
+        "noFloatingPromises": "error",
+        "noImportCycles": "error"
+      }
     }
   }
 }
