@@ -35,7 +35,7 @@ A high-performance boilerplate for creating TypeScript HTTP servers using [Ultim
 
 ## Introduction
 
-Welcome to the **Ultimate Express TypeScript Boilerplate**. This template equips you with a lightning-fast, production-ready server foundation by replacing Express with the superior [Ultimate Express](https://github.com/dimdenGD/ultimate-express). With the advantages of SWC transpilation, modern TypeScript configuration, and a focus on developer efficiency, you can scale up projects quickly and reliably.
+The main goal of this project is to provide a base template for the generation of a production-ready REST API made with Node.js, Express and Typescript. The idea is to avoid having to configure all the tools involved in a project every time it is started and thus be able to focus on the definition and implementation of the business logic.
 
 ## Motivation
 
@@ -46,93 +46,160 @@ This boilerplate is designed to help you:
 - **Ensure Consistency:** Leverage modern tools like SWC, Biome, Vitest, and Docker for a consistent development experience.
 - **Support Modern Workflows:** Adopt TypeScript best practices and leverage a modular, scalable folder structure.
 
+This is an opinionated template. The architecture of the code base and the configuration of the different tools used has been based on best practices and personal preferences.
+
 ## Features
 
-- Ultimate Express Integration: Full API compatibility with Express, with significant performance benefits.
-- TypeScript-First Approach: Strict type checking and modern project configuration.
-- SWC Transpilation: Lightning-fast builds powered by SWC.
-- Efficient Testing: Uses Vitest with Supertest for fast and reliable testing.
-- Modern Tooling: Biome for linting/formatting, concurrently for process management, and robust Docker integration.
-- Stable Node Environment: Latest LTS Node version in .nvmrc
-- Optimized Folder Structure: Clear separation of assets, source code, tests, and build outputs for maintainability.
-- Comprehensive Testing: Setup with Vitest and Supertest
-- Unified Code Style: Biomejs for consistent coding standards
-- Docker Support: Ready for containerization and deployment
+- **Core Framework**: Robust server foundation using **Express.js** (via @reflet/express) with full **TypeScript** support for type safety and scalability.
+- **High-Performance Server**: Utilizes **listhen** for fast and efficient HTTP server listening, optimizing response times.
+- **Efficient Build Process**: Leverages the **TypeScript Compiler (tsc)** with `tsc-alias` for effective compilation and path alias resolution.
+- **Runtime Type Safety**: Implements **Typia** for runtime validation of types, ensuring data integrity throughout your application.
+- **Secure Configuration Management**: Uses **dotenv** and **dotenv-expand** for secure and flexible management of environment variables.
+- **Advanced Logging**: Integrated **Pino logger** with `pino-pretty` for structured, readable, and high-performance logging.
+- **Comprehensive Testing Suite**: Employs **Vitest** for unit and integration testing, supported by **Supertest** for HTTP assertions and **Cucumber** for behavior-driven development.
+- **Code Consistency**: Enforces strict code style and formatting using **Biome.js**, maintaining a clean and readable codebase.
+- **Dependency Optimization**: Utilizes **Knip** to detect and remove unused files, dependencies, and exports, keeping the project lean.
+- **Powerful Task Management**: Automates common development tasks with **Taskfile.yml**, providing a Makefile-like experience for build, test, and deployment workflows.
+- **Structured API Design**: Features a well-organized routing system and middleware pipeline for building scalable and maintainable APIs.
+- **Centralized Error Handling**: Provides a robust, centralized mechanism for managing and responding to errors gracefully.
+- **Containerization Ready**: Includes a **Dockerfile** and Docker-specific tasks in `Taskfile.yml` for easy containerization and deployment.
+- **Automated Git Hooks**: Manages Git hooks with **Lefthook**, automating checks and tasks before commits and pushes.
+- **Continuous Integration & Delivery (CI/CD)**: Pre-configured **GitHub Actions** for automated linting, testing, and dependency reviews.
+- **Modular Architecture**: Employs a clear project structure with **path aliases** (e.g., `@/`, `@contexts/`) for improved code organization and maintainability.
+- **OpenAPI Specification**: Includes support for **@samchon/openapi**, facilitating the generation and validation of OpenAPI (Swagger) specifications.
 
 
 ## Getting Started
 
+### Prerequisites
+
+Before you begin, ensure you have the following tools installed:
+- Node.js (version specified in `.nvmrc` or `.tool-versions`)
+- pnpm (version specified in `packageManager` field in `package.json`)
+- Docker
+
+You can verify the presence of these tools by running:
+```bash
+task requirements
+```
+This will also check for Node.js, pnpm, and Docker.
+
 ### Quick Clone with tiged/degit
 
-For a fast, lightweight clone of this repository, we recommend using [tiged](https://github.com/tiged/tiged) (or the alias degit). Instead of using `git clone` and downloading the entire commit history, run the following command:
-
+For a fast, lightweight clone of this repository (without Git history), use [tiged](https://github.com/tiged/tiged) (or its alias `degit`):
 ```bash
 tiged sanurb/ultimate-express-typescript my-app
 ```
-
-This command downloads the latest commit snapshot into the folder `my-app`, resulting in a much quicker setup.
+Alternatively, you can perform a full clone with `git clone`.
 
 ### Installation
 
-After cloning, navigate to your project directory and install dependencies using [pnpm](https://pnpm.io/):
+1.  Navigate to your project directory:
+    ```bash
+    cd my-app
+    ```
+2.  Install dependencies and set up the development environment:
+    ```bash
+    task install
+    ```
+    This command uses `pnpm install` to download dependencies. `pnpm` will automatically trigger the `prepare` script in `package.json`, which handles tasks like setting up `ts-patch` and creating an initial `.env` file from `.env.example` via `scripts/prepare-env.ts`.
 
-```bash
-cd my-app
-pnpm i
-```
-
+3.  Install Git hooks (recommended for contributing):
+    ```bash
+    task lefthook.install
+    ```
 
 ## Usage
 
-### Development Mode
+This project uses [Taskfile](https://taskfile.dev/) for managing scripts and tasks, similar to Makefiles. All primary operations are defined as tasks in `Taskfile.yml`.
 
-Start the development server with live recompilation and auto-reloading:
-
+You can list all available tasks by running:
 ```bash
-pnpm dev
+task help
 ```
 
-This command runs two processes concurrently:
-- **watch:compile:** Monitors your TypeScript files using SWC and outputs them into the `dist/` folder.
-- **watch:dev:** Launches your server in Node’s watch mode, reloading upon changes.
+### Development Mode
+
+To start the development server with live compilation (using `tsc`) and auto-reloading (using `node --watch`):
+```bash
+task dev
+```
+The server will typically be available at `http://localhost:8080` (or the port defined in your `.env` file).
 
 ### Build & Production
 
-For a production-ready build, run:
-
+**Build:**
+To compile the TypeScript code into JavaScript in the `dist/` directory:
 ```bash
-pnpm build
+task build
 ```
 
-This cleans the previous build and transpiles your code into the `dist/` directory. To run in production:
+**Running in Production (Docker Recommended):**
+For production deployments, it's highly recommended to use the provided Docker setup:
 
-```bash
-NODE_ENV=production pnpm build && node dist/src/server.js
-```
+1.  Ensure you have an `.env` file configured for your production environment.
+2.  Build the Docker image:
+    ```bash
+    task docker.build
+    ```
+3.  Run the Docker container:
+    ```bash
+    task docker.run
+    ```
+    This will start the container in detached mode.
 
 ### Testing
 
-Execute your tests with Vitest:
-
-```bash
-pnpm test
-```
-
-For code coverage, run:
-
-```bash
-pnpm test:cov
-```
+- Run all tests (unit and integration) using Vitest:
+  ```bash
+  task test
+  ```
+- Run tests with code coverage (often used in CI environments):
+  ```bash
+  task test:ci
+  ```
 
 ### Linting & Formatting
 
-Keep your code clean and uniform by running:
+This project uses Biome.js for linting and formatting, and Knip for detecting unused code/dependencies.
 
-```bash
-pnpm lint       # to check for issues
-pnpm lint:fix   # to automatically fix issues
-pnpm format     # to format your codebase using Biome
-```
+- **Linting:**
+  ```bash
+  task lint        # Check for linting issues
+  task lint.fix    # Automatically fix linting issues
+  ```
+- **Formatting:**
+  ```bash
+  task format       # Format the codebase
+  task format.check # Check if the codebase is correctly formatted
+  ```
+- **Unused Code Detection (Knip):**
+  ```bash
+  task lint.knip      # Check for unused files, dependencies, and exports
+  task lint.knip.fix  # Remove unused files, dependencies, and exports
+  ```
+
+### Docker Commands
+
+The `Taskfile.yml` provides several commands to manage Docker containers:
+
+- `task docker.build`: Builds the Docker image for the application.
+- `task docker.run`: Runs the application in a Docker container (requires an `.env` file).
+- `task docker.logs`: Tails the logs from the running Docker container.
+- `task docker.stop`: Stops and removes the running Docker container.
+- `task docker.clean`: Stops and removes the container, the image, and prunes dangling images.
+
+### Other Useful Tasks
+
+- `task help`: Lists all available tasks defined in `Taskfile.yml`.
+- `task requirements`: Checks if all necessary tools (Node, pnpm, Docker) are installed.
+- `task typecheck`: Runs the TypeScript compiler to check for type errors without emitting files.
+- `task audit`: Performs a security audit of project dependencies using `npm audit`.
+- `task clean.dist`: Removes the `dist/` directory.
+- `task clean.node`: Removes `node_modules/` and `pnpm-lock.yaml`.
+- `task clean.all`: Performs a full cleanup (dist, node_modules, Docker resources).
+- `task lefthook.install`: Installs Git hooks managed by Lefthook.
+- `task deps`: Interactively check and update dependencies using `npm-check-updates` (via pnpm script).
 
 
 
@@ -141,33 +208,65 @@ pnpm format     # to format your codebase using Biome
 Below is an overview of the project’s folder structure:
 
 ```
-ultimate-express-typescript/
-├── assets/                    # Static assets, images, etc.
-├── dist/                      # Compiled output (generated by build/watch)
-│   └── src/
-│       ├── app.js
-│       ├── controllers/
-│       │   └── health_controller.js
-│       ├── routes/
-│       │   └── health.route.js
-│       └── server.js
-├── src/                       # Source code (TypeScript)
-│   ├── app.ts
-│   ├── controllers/
-│   │   └── health_controller.ts
-│   ├── routes/
-│   │   ├── health.route.ts
-│   │   └── index.ts
-│   ├── server.ts
-│   └── types/
-│       └── reset.d.ts
-├── tests/                     # End-to-end and integration tests
-├── Dockerfile                 # Dockerfile for containerization
-├── biome.json
-├── package.json
-├── pnpm-lock.yaml
-├── tsconfig.json
-└── README.md
+.
+├── .github/                  # GitHub Actions workflows and repository configurations
+│   ├── actions/              # Custom GitHub Actions
+│   └── workflows/            # CI/CD pipeline definitions (lint, test, etc.)
+├── .vscode/                  # VSCode editor specific settings
+├── .zed/                     # Zed editor specific settings
+├── assets/                   # Static assets like images, logos
+├── dist/                     # Compiled JavaScript output (generated from src/)
+├── node_modules/             # Directory where project dependencies are installed (managed by pnpm)
+├── scripts/                  # Helper scripts for various tasks
+│   ├── prepare-env.ts        # Script for preparing environment configurations
+│   └── rm.ts                 # Script for removing files/directories (e.g., cleaning dist/)
+├── src/                      # TypeScript source code for the application
+│   ├── app.ts                # Application composition root, wires up dependencies
+│   ├── index.ts              # Main entry point of the application
+│   ├── apps/                 # Houses application-specific logic
+│   │   ├── config/           # Configuration files (environments, constants)
+│   │   │   ├── constants.ts
+│   │   │   └── envs.ts
+│   │   ├── core/             # Core business logic, independent of transport layer
+│   │   │   └── health/       # Example: Health check domain logic
+│   │   └── http/             # HTTP server specific implementation
+│   │       ├── middleware/   # Express.js custom middleware
+│   │       ├── routes/       # Route definitions and handlers
+│   │       ├── server/       # HTTP server setup and instantiation (ExpressHttpServer)
+│   │       └── types.ts      # HTTP specific types
+│   ├── contexts/             # Shared modules, cross-cutting concerns, and framework code
+│   │   └── shared/
+│   │       ├── domain/       # Shared domain logic and base classes
+│   │       ├── global-context/ # Global application context/state (if any)
+│   │       ├── logger/       # Logging setup and utilities (Pino)
+│   │       ├── problem/      # Standardized error/problem details implementation
+│   │       ├── response/     # Standardized API response structures
+│   │       └── utils/        # Common utility functions
+│   └── types/                # Global TypeScript type definitions and declarations
+│       └── reset.d.ts        # TypeScript global type resets/enhancements
+├── tests/                    # Automated tests
+│   ├── features/             # Behavior-driven development (BDD) tests using Cucumber
+│   │   └── health.feature
+│   └── unit/                 # Unit tests for individual modules/functions
+│       └── health_controller.test.ts
+├── .env.example              # Example environment variable file
+├── .gitignore                # Specifies intentionally untracked files that Git should ignore
+├── .npmignore                # Specifies files that should be ignored when publishing to npm
+├── .nvmrc                    # Node Version Manager configuration file
+├── .tool-versions            # asdf version manager configuration file
+├── biome.json                # Configuration for Biome.js (linter, formatter)
+├── commitlint.config.ts      # Configuration for commit message linting
+├── Dockerfile                # Instructions for building a Docker container for the application
+├── knip.config.ts            # Configuration for Knip (dependency and unused code detection)
+├── lefthook.yml              # Configuration for Lefthook (Git hooks manager)
+├── LICENSE                   # Project's software license information
+├── package.json              # Defines project metadata, dependencies, and scripts
+├── pnpm-lock.yaml            # Exact versions of dependencies (lock file for pnpm)
+├── pnpm-workspace.yaml       # PNPM workspace configuration
+├── README.md                 # This file: Project overview, setup, and usage instructions
+├── Taskfile.yml              # Definitions for tasks managed by Task (task runner)
+├── tsconfig.json             # TypeScript compiler options and project configuration
+└── vitest.config.mjs         # Configuration for Vitest (test runner)
 ```
 
 
