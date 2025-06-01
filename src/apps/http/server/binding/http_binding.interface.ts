@@ -14,7 +14,7 @@ import type { Express } from "express";
 export interface HttpListener {
   /** Underlying Node HTTP server (or wrapper). */
   readonly server: http.Server;
-  /** URL on which this listener is serving (e.g. http://localhost:3001). */
+  /** URL on which this listener is serving (e.g. http://localhost:8080). */
   readonly url: string;
   /** Gracefully close / shutdown the server. */
   close(): Promise<void>;
