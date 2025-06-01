@@ -13,6 +13,7 @@
     "fix:knip": "knip --fix --no-exit-code",
     "format": "biome format --write",
     "dev": "pnpm run --stream --color \"/^watch:/\"",
+    "deps": "pnpm dlx npm-check-updates@latest --interactive --format group",
     "watch:compile": "tsc --watch --preserveWatchOutput",
     "watch:dev": "wait-on ./dist/src/index.js && node -r ts-node/register -r tsconfig-paths/register --watch ./dist/src/index.js --watch-preserve-output",
     "prepare": "ts-patch install && ts-node scripts/prepare-env.ts"
