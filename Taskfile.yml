@@ -1,0 +1,284 @@
+version: '3'
+
+dotenv:
+  - '.env'
+
+env:
+  NODE_ENV: "{{ default \"development\" .NODE_ENV }}"
+
+# ──────────────────────────────────────────────────────────────────────
+# Global, reusable variables
+vars:
+  APP_NAME:       "{{ .APP_NAME       | default `express-typescript-skeleton` }}"
+  TAG:            "{{ .TAG            | default `dev`                   }}"
+  IMAGE_NAME:     "{{ .APP_NAME }}:{{ .TAG }}"
+  CONTAINER_NAME: "{{ .APP_NAME }}-container"
+  PORT:           "{{ .PORT           | default `8080`                 }}"
+  DIST_DIR:       "dist"
+  GIT_COMMIT:
+    sh: "git rev-parse --short HEAD"
+
+# ──────────────────────────────────────────────────────────────────────
+set:   ["pipefail"]
+shopt: ["globstar"]
+
+# Use "prefixed" output mode so that parallel tasks each emit a [task-name] prefix
+output: prefixed
+
+# ──────────────────────────────────────────────────────────────────────
+tasks:
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                    ✨ Helper & Requirements Tasks ✨               ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  help:
+    desc: "Show all available tasks"
+    cmds:
+      - task --list
+
+  requirements:
+    desc: "Verify that docker and pnpm are installed"
+    silent: true
+    preconditions:
+      - sh:  "command -v docker"
+        msg:  "❌ Docker is not installed!"
+      - sh:  "command -v pnpm"
+        msg:  "❌ pnpm is not installed!"
+      - sh:  "command -v node"
+        msg:  "❌ Node.js is not installed!"
+    cmds:
+      - echo "✅ Required tools are available."
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                      🛠 Project Setup Task 🛠                      ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  install:
+    desc: "Install dependencies via pnpm"
+    deps:
+      - requirements
+    cmds:
+      - echo "📦 Installing dependencies..."
+      - pnpm install
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                         🚀 Development Task 🚀                       ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  dev:
+    desc: "Run development server"
+    deps:
+      - install
+    cmds:
+      - echo "🚀 Starting development server..."
+      - pnpm run dev
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                   🔨 Build & Typecheck Tasks 🔨                      ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  build:
+    desc: "Compile TypeScript"
+    deps:
+      - install
+    cmds:
+      - echo "🔨 Building project..."
+      - pnpm run build
+
+  typecheck:
+    desc: "Type-check only"
+    deps:
+      - install
+    cmds:
+      - echo "🔍 Running type-check..."
+      - pnpm run typecheck
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                     ✍️ Lint & Format Tasks ✍️                         ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  lint:
+    desc: "Run Biome lint"
+    deps:
+      - install
+    cmds:
+      - echo "🧹 Linting code..."
+      - pnpm run lint
+
+  lint.fix:
+    desc: "Auto-fix lint issues"
+    deps:
+      - install
+    cmds:
+      - echo "🧹 Fixing lint issues..."
+      - pnpm run lint:fix
+
+  lint.knip:
+    desc: "Check for unused dependencies"
+    deps:
+      - install
+    cmds:
+      - echo "🔍 Checking unused dependencies..."
+      - pnpm run lint:knip
+
+  lint.knip.fix:
+    desc: "Fix unused dependencies"
+    deps:
+      - install
+    cmds:
+      - echo "🔧 Removing unused dependencies..."
+      - pnpm run fix:knip
+
+  format:
+    desc: "Format code"
+    deps:
+      - install
+    cmds:
+      - echo "🎨 Formatting code..."
+      - pnpm run format
+
+  format.check:
+    desc: "Check code formatting"
+    deps:
+      - install
+    cmds:
+      - echo "🔍 Verifying format..."
+      - pnpm run format --check
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                       ✅ Testing Tasks ✅                            ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  test:
+    desc: "Run unit tests"
+    deps:
+      - install
+    cmds:
+      - echo "🧪 Running tests..."
+      - pnpm run test
+
+  test.ci:
+    desc: "Run tests with coverage"
+    deps:
+      - install
+    cmds:
+      - echo "🧪 Running tests in CI mode with coverage..."
+      - pnpm run test:cov
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                     🐳 Docker & Deployment Tasks 🐳                    ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  docker.build:
+    desc: "Build Docker image"
+    requires:
+      vars:
+        - IMAGE_NAME
+        - PORT
+    deps:
+      - build
+    cmds:
+      - 'echo "📦 Building Docker image: {{ .IMAGE_NAME }} (commit={{ .GIT_COMMIT }})"'
+      - |
+        docker build \
+          --build-arg PORT={{ .PORT }} \
+          --label git-commit={{ .GIT_COMMIT }} \
+          -t {{ .IMAGE_NAME }} \
+          -f ./Dockerfile \
+          .
+
+  docker.run:
+    desc: "Run Docker container detached (production mode)"
+    requires:
+      vars:
+        - IMAGE_NAME
+        - PORT
+        - CONTAINER_NAME
+    preconditions:
+      - sh:  "[ -f .env ]"
+        msg:  "❌ Missing .env file—cannot run container"
+    deps:
+      - docker.build
+    cmds:
+      - 'echo "▶️ Starting Docker container: {{ .CONTAINER_NAME }} on port {{ .PORT }}"'
+      - |
+        docker run -d \
+          --name {{ .CONTAINER_NAME }} \
+          -p {{ .PORT }}:{{ .PORT }} \
+          --env NODE_ENV=production \
+          --env-file .env \
+          {{ .IMAGE_NAME }}
+
+  docker.logs:
+    desc: "Follow logs from the running Docker container"
+    requires:
+      vars:
+        - CONTAINER_NAME
+    cmds:
+      - echo "📜 Tailing logs for {{ .CONTAINER_NAME }}..."
+      - docker logs -f {{ .CONTAINER_NAME }}
+
+  docker.stop:
+    desc: "Stop and remove the Docker container"
+    requires:
+      vars:
+        - CONTAINER_NAME
+    cmds:
+      - 'echo "🛑 Stopping container: {{ .CONTAINER_NAME }}..."'
+      - docker stop {{ .CONTAINER_NAME }} || true
+      - docker rm {{ .CONTAINER_NAME }} || true
+
+  docker.clean:
+    desc: "Remove Docker container, image, and prune dangling images"
+    requires:
+      vars:
+        - IMAGE_NAME
+        - CONTAINER_NAME
+    cmds:
+      - echo "🧼 Cleaning Docker resources for {{ .IMAGE_NAME }}..."
+      - docker stop {{ .CONTAINER_NAME }} || true
+      - docker rm {{ .CONTAINER_NAME }} || true
+      - docker rmi {{ .IMAGE_NAME }} || true
+      - docker image prune -f
+
+  ##─────────────────────────────────────────────────────────────────────##
+  ##                       🧹 Cleanup & Utility Tasks 🧹                   ##
+  ##─────────────────────────────────────────────────────────────────────##
+
+  clean.dist:
+    desc: "Remove compiled output directory ({{ .DIST_DIR }})"
+    cmds:
+      - echo "🧹 Deleting {{ .DIST_DIR }}..."
+      - rm -rf {{ .DIST_DIR }}
+
+  clean.node:
+    desc: "Remove node_modules folder and pnpm-lock.yaml"
+    cmds:
+      - echo "🧹 Removing node_modules and pnpm-lock.yaml..."
+      - rm -rf node_modules pnpm-lock.yaml
+
+  clean.all:
+    desc: "Full cleanup: dist/, node_modules, Docker images/containers"
+    deps:
+      - clean.dist
+      - clean.node
+      - docker.clean
+    cmds:
+      - echo "✅ Completed full cleanup."
+
+  audit:
+    desc: "Run npm audit for vulnerability checks"
+    deps:
+      - install
+    cmds:
+      - echo "🔒 Auditing dependencies..."
+      - npm audit --audit-level=moderate
+
+  lefthook.install:
+    desc: "Install Git hooks using Lefthook"
+    deps:
+      - install
+    cmds:
+      - echo "🔗 Installing Git hooks..."
+      - npx lefthook install
