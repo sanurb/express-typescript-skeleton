@@ -8,7 +8,7 @@ import type { Formatter, LogFormat, Transport, TransportType } from "./types";
 const formatterMap = new Map<string, () => Formatter>();
 export function registerFormatter(
   format: LogFormat,
-  factory: () => Formatter,
+  factory: () => Formatter
 ): void {
   formatterMap.set(format, factory);
 }
@@ -23,7 +23,7 @@ export function resolveFormatter(format: string): Formatter {
 const transportMap = new Map<TransportType, () => Transport>();
 export function registerTransport(
   type: TransportType,
-  factory: () => Transport,
+  factory: () => Transport
 ): void {
   transportMap.set(type, factory);
 }

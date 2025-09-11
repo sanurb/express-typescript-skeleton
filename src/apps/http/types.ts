@@ -3,7 +3,7 @@ import type { Express } from "express";
 
 export type HttpHandler = (
   req: IncomingMessage,
-  res: ServerResponse,
+  res: ServerResponse
 ) => void | Promise<void>;
 
 export type HttpMiddleware = (next: HttpHandler) => HttpHandler;

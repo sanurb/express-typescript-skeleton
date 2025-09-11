@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@amiceli/vitest-cucumber": "5.1.0",
-    "@biomejs/biome": "2.0.0-beta.6",
+    "@biomejs/biome": "2.2.2",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@commitlint/types": "19.8.1",
@@ -78,6 +78,7 @@
     "ts-patch": "3.3.0",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.8.3",
+    "ultracite": "5.3.3",
     "vitest": "3.1.4",
     "wait-on": "8.0.3"
   },

@@ -27,8 +27,8 @@ export class JsonFormatter implements Formatter {
    */
   public constructor(
     private readonly sanitizer: (
-      v: unknown,
-    ) => JsonValue = sanitizeForSerialization,
+      v: unknown
+    ) => JsonValue = sanitizeForSerialization
   ) {}
 
   /**

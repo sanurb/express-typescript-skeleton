@@ -33,7 +33,7 @@ export class ExpressHttpServer extends EventEmitter implements HttpServer {
    */
   constructor(
     private readonly cfg: AppEnvironment,
-    private readonly binding: HttpBinding = new DefaultBinding(),
+    private readonly binding: HttpBinding = new DefaultBinding()
   ) {
     super();
     applyMiddleware(this.app, MIDDLEWARE_PIPELINE);
@@ -47,7 +47,7 @@ export class ExpressHttpServer extends EventEmitter implements HttpServer {
           title: "Not Found",
           status: 404,
           detail: "The requested resource was not found",
-        }),
+        })
       );
     });
 

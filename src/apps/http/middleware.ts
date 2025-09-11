@@ -56,7 +56,7 @@ export function set<
  * @param key - the name of the setting to disable (e.g. 'x-powered-by')
  */
 export function disable<K extends Parameters<Express["disable"]>[0]>(
-  key: K,
+  key: K
 ): Middleware {
   return (app) => {
     app.disable(key);
@@ -87,7 +87,7 @@ export const MIDDLEWARE_PIPELINE = [
  */
 export function applyMiddleware(
   app: Express,
-  pipeline: readonly Middleware[],
+  pipeline: readonly Middleware[]
 ): Express {
   return pipeline.reduce((cfg, fn) => fn(cfg), app);
 }

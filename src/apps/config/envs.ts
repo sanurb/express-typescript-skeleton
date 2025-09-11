@@ -18,7 +18,7 @@ const environmentSingleton = new Singleton<AppEnvironment>(
     const baseEnv = dotenv.config();
     dotenvExpand.expand(baseEnv);
     return typia.assert<AppEnvironment>(process.env);
-  },
+  }
 );
 
 export const env: AppEnvironment = environmentSingleton.get();

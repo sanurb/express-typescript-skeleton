@@ -21,8 +21,8 @@ export class PrettyFormatter implements Formatter {
 
   public constructor(
     private readonly sanitize: (
-      input: unknown,
-    ) => JsonValue = sanitizeForSerialization,
+      input: unknown
+    ) => JsonValue = sanitizeForSerialization
   ) {}
 
   public format(record: LogRecord): string {

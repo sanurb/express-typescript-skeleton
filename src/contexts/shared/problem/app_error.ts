@@ -63,7 +63,7 @@ export class AppError extends Error implements BaseProblem {
  * Factory alias so you can `throw createAppError({...})` instead of `new`.
  */
 export function createAppError(
-  params: ConstructorParameters<typeof AppError>[0],
+  params: ConstructorParameters<typeof AppError>[0]
 ): AppError {
   return new AppError(params);
 }

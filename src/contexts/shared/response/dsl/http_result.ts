@@ -41,12 +41,12 @@ export type HttpResult<T = unknown> = HttpResultOk<T> | HttpResultProblem;
  */
 export function createOkResult<T>(
   data: T,
-  options?: HttpResultOptions & { status?: number },
+  options?: HttpResultOptions & { status?: number }
 ): HttpResultOk<T> {
   const status = options?.status ?? Status.Ok;
   if (status < Status.Success.Ok || status >= Status.ClientError.BadRequest) {
     throw new Error(
-      `Invalid status for ok result: ${status}. Must be 2xx or 3xx.`,
+      `Invalid status for ok result: ${status}. Must be 2xx or 3xx.`
     );
   }
   return {
@@ -64,11 +64,11 @@ export function createOkResult<T>(
 export function createProblemResult(
   status: number,
   title: string,
-  options?: Omit<HttpResultProblem, "type" | "status" | "title">,
+  options?: Omit<HttpResultProblem, "type" | "status" | "title">
 ): HttpResultProblem {
   if (status < Status.ClientError.BadRequest || status >= 600) {
     throw new Error(
-      `Invalid status for problem result: ${status}. Must be 4xx or 5xx.`,
+      `Invalid status for problem result: ${status}. Must be 4xx or 5xx.`
     );
   }
   if (!title || title.trim().length === 0) {
@@ -100,7 +100,7 @@ const errorHelpers: Record<
  */
 type ErrorHelper = (
   detail?: string,
-  options?: HttpResultOptions,
+  options?: HttpResultOptions
 ) => HttpResultProblem;
 
 type HttpResultStatic = {
@@ -117,14 +117,14 @@ export const HttpResult: HttpResultStatic = Object.entries(errorHelpers).reduce(
   (acc, [key, [status, title]]) => {
     (acc as Partial<HttpResultStatic>)[key as keyof typeof errorHelpers] = (
       detail?: string,
-      options?: HttpResultOptions,
+      options?: HttpResultOptions
     ) => createProblemResult(status, title, { detail, ...options });
     return acc;
   },
   {
     ok: createOkResult,
     problem: createProblemResult,
-  } as Partial<HttpResultStatic>,
+  } as Partial<HttpResultStatic>
 ) as HttpResultStatic;
 
 /**
@@ -135,7 +135,7 @@ export function matchHttpResult<T, U>(
   handlers: {
     ok: (ok: HttpResultOk<T>) => U;
     problem: (problem: HttpResultProblem) => U;
-  },
+  }
 ): U {
   return result.type === "ok" ? handlers.ok(result) : handlers.problem(result);
 }

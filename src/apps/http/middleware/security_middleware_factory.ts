@@ -29,7 +29,7 @@ export class SecurityMiddlewareBuilder {
       Object.entries(DEFAULT_CSP_DIRECTIVES).map(([key, arr]) => [
         key,
         [...arr],
-      ]),
+      ])
     );
 
     this.helmetOptions = {
@@ -126,11 +126,11 @@ export class SecurityMiddlewareBuilder {
   private addCustomHeaders(
     _req: Request,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ): void {
     res.setHeader(
       CUSTOM_HEADERS.PermissionsPolicy,
-      "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+      "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
     );
     res.setHeader(ResponseHeader.XContentTypeOptions, "nosniff");
     res.setHeader(ResponseHeader.XFrameOptions, "DENY");

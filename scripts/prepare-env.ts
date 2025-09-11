@@ -38,7 +38,7 @@ export function prepareEnv(): void {
     console.log(fallback.log);
   } else {
     console.warn(
-      "No .env, .env.local, or .env.example found. Skipping .env setup.",
+      "No .env, .env.local, or .env.example found. Skipping .env setup."
     );
   }
 }

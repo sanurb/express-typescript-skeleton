@@ -21,7 +21,7 @@ function sanitizeRequestId(rawHeader: string | string[] | undefined): string {
 export function addRequestId(
   req: IncomingMessage,
   res: ServerResponse,
-  next: () => void,
+  next: () => void
 ): void {
   const requestId = sanitizeRequestId(req.headers[REQUEST_ID_HEADER]);
 

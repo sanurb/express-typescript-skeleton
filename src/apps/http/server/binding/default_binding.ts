@@ -13,7 +13,7 @@ import type { HttpBinding, HttpListener } from "./http_binding.interface";
 class DefaultListener implements HttpListener {
   constructor(
     public readonly server: ReturnType<typeof createServer>,
-    public readonly url: string,
+    public readonly url: string
   ) {}
 
   async close(): Promise<void> {

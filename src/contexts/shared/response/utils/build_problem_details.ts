@@ -6,7 +6,7 @@ export const buildProblemDetails = (
   detail?: string,
   extensions?: ProblemDetails["extensions"],
   type = "about:blank",
-  instance?: string,
+  instance?: string
 ): ProblemDetails => ({
   type,
   title,

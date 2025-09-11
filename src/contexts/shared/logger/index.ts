@@ -50,11 +50,11 @@ registerTransport(
   () =>
     new PrettyTransport({
       translateTime: "SYS:standard",
-    }),
+    })
 );
 
 export function createLogger(
-  overrides?: Partial<Readonly<LoggerConfig>>,
+  overrides?: Partial<Readonly<LoggerConfig>>
 ): Logger {
   const base = { ...DEFAULT_LOGGER_CONFIG };
   if (!isProduction) {
@@ -70,7 +70,7 @@ export function createLogger(
 
   const formatter: Formatter = resolveFormatter(cfg.format);
   const transports: Transport[] = cfg.transports.map((t) =>
-    resolveTransport(t),
+    resolveTransport(t)
   );
   const dispatcher = new DefaultLogDispatcher(cfg, transports);
 

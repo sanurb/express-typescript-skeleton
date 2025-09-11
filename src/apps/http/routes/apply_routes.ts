@@ -19,7 +19,7 @@ import type { RouteMapping } from "./types";
  */
 export function applyRoutes(
   app: ExpressApp,
-  routes: readonly RouteMapping[],
+  routes: readonly RouteMapping[]
 ): void {
   const refletRouters: Registration[] = [];
 

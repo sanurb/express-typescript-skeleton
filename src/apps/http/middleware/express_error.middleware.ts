@@ -10,7 +10,7 @@ export const expressErrorMiddleware: ErrorRequestHandler = (
   err,
   _req,
   res,
-  _next,
+  _next
 ) => {
   const appError = handleError(err);
   // Send RFC7807 JSON
