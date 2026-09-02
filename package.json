@@ -63,7 +63,7 @@
     "uuid": "11.1.0"
   },
   "devDependencies": {
-    "@amiceli/vitest-cucumber": "5.1.0",
+    "@amiceli/vitest-cucumber": "5.2.1",
     "@biomejs/biome": "2.2.2",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
@@ -73,13 +73,13 @@
     "@types/supertest": "6.0.3",
     "knip": "5.60.2",
     "lefthook": "1.11.13",
-    "supertest": "7.1.1",
+    "supertest": "7.2.2",
     "ts-node": "10.9.2",
     "ts-patch": "3.3.0",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.8.3",
     "ultracite": "5.3.3",
-    "vitest": "3.1.4",
+    "vitest": "3.2.7",
     "wait-on": "8.0.3"
   },
   "packageManager": "pnpm@10.12.1"
